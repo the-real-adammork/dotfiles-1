@@ -1,3 +1,5 @@
+install wkhtmltopdf - https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.macos-cocoa.pkg
+^^ find way to automate this
 [![Beerpay](https://beerpay.io/atomantic/dotfiles/badge.svg?style=flat-square)](https://beerpay.io/atomantic/dotfiles)
 
 # \\[._.]/ - Hi, I'm the MacOS bot

@@ -305,6 +305,11 @@ git config --global color.diff.commit     "yellow bold"
 git config --global color.diff.old        "red bold"
 ok
 
+
+#bot "download wkhtmltopdf binary"
+#wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.macos-cocoa.pkg
+#ok
+
 ###############################################################################
 bot "Configuring General System UI/UX..."
 ###############################################################################
