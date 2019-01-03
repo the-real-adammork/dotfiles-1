@@ -42,7 +42,7 @@ export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(colorize compleat dirpersist autojump git gulp history cp zsh-autosuggestions)
+plugins=(colorize compleat dirpersist autojump git gulp history cp zsh-autosuggestions history-substring-search  zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,6 +85,7 @@ nvmload() {
   add-zsh-hook chpwd load-nvmrc
   load-nvmrc
 }
+nvmload
 
 HISTFILESIZE=10000000
 
@@ -93,6 +94,17 @@ fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
+# Add aliases and convenience calls for - fasd
+eval "$(fasd --init auto)"
+alias v='f -e vim' # quick opening files with vim
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+
+# SCM Breeze
+[ -s "/Users/adammork/.scm_breeze/scm_breeze.sh" ] && source "/Users/adammork/.scm_breeze/scm_breeze.sh"
+
 # Performance Logging
 #unsetopt XTRAC#E
 #exec 2>&3 3>&-
+
