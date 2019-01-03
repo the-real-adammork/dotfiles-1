@@ -11,8 +11,10 @@ module.exports = {
     "dos2unix",
     "diff-so-fancy",
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+    "ffmpeg",
     "findutils",
     // 'fortune',
+    "fasd",
     "fzf",
     "readline", // ensure gawk gets good readline
     "gawk",
@@ -40,9 +42,11 @@ module.exports = {
     "nmap",
     "openconnect",
     "python",
+    "python@2",
     "reattach-to-user-namespace",
     // better/more recent version of screen
     "homebrew/dupes/screen",
+    "tig",
     "tmux",
     "todo-txt",
     "tree",
@@ -54,6 +58,8 @@ module.exports = {
     "wget --enable-iri",
     // Need vim from brew to get copy to clipboard, not compiled by default in mac.
     "vim",
+    "yank",
+    "youtube-dl",
   ],
   cask: [
     "3hub",
