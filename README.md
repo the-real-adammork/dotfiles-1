@@ -17,6 +17,12 @@ mac stuff everytime.
 
 Figure out how to speed up this stupid NVM thing! needed for prettier so should be on by default.
 
+**Numbered files in GIT commands**
+
+git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
+~/.scm_breeze/install.sh
+source ~/.bashrc   # or source ~/.zshrc
+
 
 [![Beerpay](https://beerpay.io/atomantic/dotfiles/badge.svg?style=flat-square)](https://beerpay.io/atomantic/dotfiles)
 
