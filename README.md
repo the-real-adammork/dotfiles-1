@@ -1,5 +1,23 @@
+TODO
+Is tmux-solarized working ?? - https://github.com/seebi/tmux-colors-solarized
+https://github.com/tmux-plugins/tpm
+install 3hub manuall
 install wkhtmltopdf - https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.macos-cocoa.pkg
 ^^ find way to automate this
+**FIX PYENV**
+
+
+ZSH - LS-Colors, solarized light theme. -
+https://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
+
+Put all color code into seperate functions and then one big function to switch.
+
+Breakup install.sh into smaller functions, lets me add and run those scripts in entirety, basically dont want todo the
+mac stuff everytime.
+
+Figure out how to speed up this stupid NVM thing! needed for prettier so should be on by default.
+
+
 [![Beerpay](https://beerpay.io/atomantic/dotfiles/badge.svg?style=flat-square)](https://beerpay.io/atomantic/dotfiles)
 
 # \\[._.]/ - Hi, I'm the MacOS bot
