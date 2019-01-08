@@ -41,6 +41,7 @@ module.exports = {
     "moreutils",
     "nmap",
     "openconnect",
+    "ripgrep",
     "python",
     "python@2",
     "reattach-to-user-namespace",
