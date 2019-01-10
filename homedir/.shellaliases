@@ -100,3 +100,9 @@ alias td="todo.sh"
 alias tda="todo.sh add"
 alias tdl="todo.sh list"
 alias tdd="todo.sh do"
+
+# Shorthand git commands
+alias gc='git commit'
+alias gc='git commit -m '
+alias gco='git checkout'
+alias gp='git push'
