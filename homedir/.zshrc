@@ -89,9 +89,16 @@ nvmload
 
 HISTFILESIZE=10000000
 
-# Add a history repeat search using fzf
-fh() {
+# fhr - Add a history repeat search using fzf, runs the command
+fhr() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+# fh - repeat history edit, drops the command into command line !
+writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
+
+fh() {
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | writecmd
 }
 
 # Add aliases and convenience calls for - fasd
@@ -108,3 +115,5 @@ export PYENV_ROOT="$HOME/.pyenv"
 #unsetopt XTRAC#E
 #exec 2>&3 3>&-
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

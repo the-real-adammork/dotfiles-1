@@ -42,11 +42,13 @@ module.exports = {
     "nmap",
     "openconnect",
     "ripgrep",
+    "peco",
     "python",
     "python@2",
     "reattach-to-user-namespace",
     // better/more recent version of screen
     "homebrew/dupes/screen",
+    "ripgrep",
     "tig",
     "tmux",
     "todo-txt",
