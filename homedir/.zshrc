@@ -42,7 +42,7 @@ export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(colorize compleat dirpersist autojump git gulp history cp zsh-autosuggestions)
+plugins=(colorize compleat dirpersist autojump gulp history cp zsh-autosuggestions history-substring-search  zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,14 +85,35 @@ nvmload() {
   add-zsh-hook chpwd load-nvmrc
   load-nvmrc
 }
+nvmload
 
 HISTFILESIZE=10000000
 
-# Add a history repeat search using fzf
-fh() {
+# fhr - Add a history repeat search using fzf, runs the command
+fhr() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
+
+# fh - repeat history edit, drops the command into command line !
+writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
+
+fh() {
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | writecmd
+}
+
+# Add aliases and convenience calls for - fasd
+eval "$(fasd --init auto)"
+alias v='f -e vim' # quick opening files with vim
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+
+# SCM Breeze
+[ -s "/Users/adammork/.scm_breeze/scm_breeze.sh" ] && source "/Users/adammork/.scm_breeze/scm_breeze.sh"
 
 # Performance Logging
 #unsetopt XTRAC#E
 #exec 2>&3 3>&-
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

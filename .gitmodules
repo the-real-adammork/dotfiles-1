@@ -16,3 +16,9 @@
 [submodule "tmux-colors-solarized"]
 	path = tmux-colors-solarized
 	url = https://github.com/seebi/tmux-colors-solarized.git
+[submodule "scm_breeze"]
+	path = homedir/.scm_breeze
+	url = git://github.com/scmbreeze/scm_breeze.git
+[submodule "xCode-Solarized"]
+	path = xCode-Solarized
+	url = git@github.com:dm-z/xCode-Solarized.git

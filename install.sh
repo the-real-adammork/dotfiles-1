@@ -187,6 +187,9 @@ require_brew git
 require_brew fontconfig
 # update zsh to latest
 require_brew zsh
+# install fzf and fzf keybindings NOT TESTED
+require_brew fzf
+$(brew --prefix)/opt/fzf/install
 # update ruby to latest
 # use versions of packages installed with homebrew
 RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
@@ -304,6 +307,11 @@ git config --global color.diff.frag       "magenta bold"
 git config --global color.diff.commit     "yellow bold"
 git config --global color.diff.old        "red bold"
 ok
+
+
+#bot "download wkhtmltopdf binary"
+#wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.macos-cocoa.pkg
+#ok
 
 ###############################################################################
 bot "Configuring General System UI/UX..."
@@ -612,7 +620,7 @@ running "Change minimize/maximize window effect to scale"
 defaults write com.apple.dock mineffect -string "scale";ok
 
 running "Minimize windows into their application’s icon"
-defaults write com.apple.dock minimize-to-application -bool true;ok
+defaults write com.apple.dock minimize-to-application -bool false;ok
 
 running "Enable spring loading for all Dock items"
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true;ok
