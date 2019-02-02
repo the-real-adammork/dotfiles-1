@@ -41,6 +41,7 @@ module.exports = {
     "openconnect",
     "python",
     "reattach-to-user-namespace",
+    "rename",
     // better/more recent version of screen
     "homebrew/dupes/screen",
     "tmux",
@@ -54,6 +55,7 @@ module.exports = {
     "wget --enable-iri",
     // Need vim from brew to get copy to clipboard, not compiled by default in mac.
     "vim",
+    "youtube-dl",
   ],
   cask: [
     "3hub",

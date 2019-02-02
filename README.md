@@ -1,5 +1,9 @@
 [![Beerpay](https://beerpay.io/atomantic/dotfiles/badge.svg?style=flat-square)](https://beerpay.io/atomantic/dotfiles)
 
+
+
+Change Caps lock modifier to be ESCAPE
+
 # \\[._.]/ - Hi, I'm the MacOS bot
 
 I will update your MacOS machine with Better™ system defaults, preferences, software configuration and even auto-install some handy development tools and apps that my developer friends find helpful.
