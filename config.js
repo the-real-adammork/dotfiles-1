@@ -50,6 +50,7 @@ module.exports = {
     // better/more recent version of screen
     "homebrew/dupes/screen",
     "ripgrep",
+    "swiftlint",
     "tig",
     "tmux",
     "todo-txt",

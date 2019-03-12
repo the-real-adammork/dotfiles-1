@@ -69,6 +69,10 @@ Plugin 'SuperTab'
 Plugin 'leafgarland/typescript-vim'
 " Vue.js
 Plugin 'posva/vim-vue'
+" Copy of the Official Apple Swift VIM Plugin
+Plugin 'bumaociyuan/vim-swift'
+" Ale, async language linting and syntax checking
+Plugin 'w0rp/ale'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -86,8 +90,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'prettier/vim-prettier', {
     \ 'do': 'npm install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
-
-Plug 'keith/swift.vim'
 call plug#end()
 
 
@@ -334,6 +336,17 @@ let g:syntastic_enable_tslint_checker = 1
 let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 let g:syntastic_enable_pug_checker = 1
 let g:syntastic_pug_checkers = ['jade','pug']
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ale (VIM syntax linting, and fixing)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+
+" Enable completion where available.
+" " This setting must be set before ALE is loaded.
+let g:ale_completion_enabled = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctrlP Vim
