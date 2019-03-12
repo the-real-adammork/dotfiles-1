@@ -22,3 +22,6 @@
 [submodule "xCode-Solarized"]
 	path = xCode-Solarized
 	url = git@github.com:dm-z/xCode-Solarized.git
+[submodule "homedir/.vim/plugged/swift.vim"]
+	path = homedir/.vim/plugged/swift.vim
+	url = git@github.com:keith/swift.vim.git

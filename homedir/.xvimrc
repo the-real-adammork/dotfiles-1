@@ -336,7 +336,8 @@ nnoremap } gt
 nnoremap + :tabnew<CR>
 let NERDTreeShowHidden=1
 
-
+" Minimum 5 lines above or below the cursor
+set scrolloff=999
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make default paste more useful
