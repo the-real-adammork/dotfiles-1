@@ -39,6 +39,7 @@ module.exports = {
     "mas",
     // Install some other useful utilities like `sponge`
     "moreutils",
+    "ncdu",
     "nmap",
     "openconnect",
     "ripgrep",
