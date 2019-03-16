@@ -17,6 +17,14 @@
     {
       "files": "*.json",
       "options": { "parser": "json" }
+    },
+    {
+      "files": "*.md",
+      "options": { "parser": "markdown"}
+    },
+    {
+      "files": "Pull_Request_Template.md",
+      "options": { "parser": "markdown",  "printWidth":1000}
     }
   ]
 }
