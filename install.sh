@@ -188,8 +188,14 @@ require_brew fontconfig
 # update zsh to latest
 require_brew zsh
 # install fzf and fzf keybindings NOT TESTED
+
+# install scm_breeze
+homedir/.scm_breeze/install.sh
+
+echo "new stuff untested"
 require_brew fzf
 $(brew --prefix)/opt/fzf/install
+echo "new stuff untested done"
 # update ruby to latest
 # use versions of packages installed with homebrew
 RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"

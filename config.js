@@ -64,6 +64,7 @@ module.exports = {
     "vim",
     "youtube-dl",
     "yank",
+    "zsh-syntax-highlighting",
   ],
   cask: [
     "3hub",

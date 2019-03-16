@@ -361,4 +361,5 @@ let NERDTreeShowHidden=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make default paste more useful
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vnoremap p "_dP
+"vnoremap p "_dP
+xnoremap <expr> p 'pgv"'.v:register.'y'

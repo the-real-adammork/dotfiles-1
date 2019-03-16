@@ -22,3 +22,9 @@
 [submodule "xCode-Solarized"]
 	path = xCode-Solarized
 	url = git@github.com:dm-z/xCode-Solarized.git
+[submodule "homedir/.tmux/plugins/tpm"]
+	path = homedir/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "homedir/.tmux/plugins/tmux-resurrect"]
+	path = homedir/.tmux/plugins/tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect

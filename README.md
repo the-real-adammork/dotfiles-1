@@ -1,7 +1,8 @@
-TODO
-Is tmux-solarized working ?? - https://github.com/seebi/tmux-colors-solarized
+// TODO
+remove rube crap from powerline
+Double check this works on new install - https://github.com/seebi/tmux-colors-solarized
 https://github.com/tmux-plugins/tpm
-install 3hub manuall
+install 3hub manually
 install wkhtmltopdf - https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.macos-cocoa.pkg
 ^^ find way to automate this
 **FIX PYENV**
@@ -18,7 +19,8 @@ mac stuff everytime.
 Figure out how to speed up this stupid NVM thing! needed for prettier so should be on by default.
 
 **Numbered files in GIT commands**
-
+j
+// Change this to be  submodule
 git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
 source ~/.bashrc   # or source ~/.zshrc
