@@ -29,8 +29,7 @@ Plugin 'prettier/vim-prettier'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 Plugin 'justinmk/vim-sneak'
@@ -69,6 +68,10 @@ Plugin 'SuperTab'
 Plugin 'leafgarland/typescript-vim'
 " Vue.js
 Plugin 'posva/vim-vue'
+" Copy of the Official Apple Swift VIM Plugin
+Plugin 'bumaociyuan/vim-swift'
+" Ale, async language linting and syntax checking
+Plugin 'w0rp/ale'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -86,8 +89,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'prettier/vim-prettier', {
     \ 'do': 'npm install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
-
-Plug 'keith/swift.vim'
 call plug#end()
 
 
@@ -253,6 +254,15 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make square brackets cycle to next and previous buffers
+map ] :bn<cr>
+map [ :bp<cr>
+
+" Make control + hjkl jump to different VIM windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 " map <up> <ESC>:bp<RETURN> " left arrow (normal mode) switches buffers
 " map <down> <ESC>:bn<RETURN> " right arrow (normal mode) switches buffers
 " map <right> <ESC>:Tlist<RETURN> " show taglist
@@ -336,6 +346,27 @@ let g:syntastic_enable_pug_checker = 1
 let g:syntastic_pug_checkers = ['jade','pug']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ale (VIM syntax linting, and fixing)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+
+" Enable completion where available.
+" " This setting must be set before ALE is loaded.
+let g:ale_completion_enabled = 1
+
+" Keep gutter always open
+let g:ale_sign_column_always = 1
+
+" Signs
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+" Finish color scheme later
+"highlight ALEWarning ctermbg=Magenta
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctrlP Vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -345,7 +376,10 @@ let g:ctrlp_show_hidden = 1
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:sneak#streak = 1
-let g:airline_theme='bubblegum'
+"let g:airline_theme='bubblegum'
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
 
 "Prettier"
 "
