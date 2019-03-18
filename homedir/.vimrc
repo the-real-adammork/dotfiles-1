@@ -255,8 +255,6 @@ endfunction
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make square brackets cycle to next and previous buffers
-map ] :bn<cr>
-map [ :bp<cr>
 
 " Make control + hjkl jump to different VIM windows
 nnoremap <C-J> <C-W><C-J>
