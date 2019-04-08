@@ -1,10 +1,45 @@
-// TODO
+<!-- TODO -->
 remove rube crap from powerline
 Double check this works on new install - https://github.com/seebi/tmux-colors-solarized
 https://github.com/tmux-plugins/tpm
 install 3hub manually
 install wkhtmltopdf - https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.macos-cocoa.pkg
 ^^ find way to automate this
+
+**Ranger Image Previews, AUTOMATE into install.sh**
+
+# Install homebrew
+command -v brew > /dev/null 2&>1 || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Install ranger
+brew install ranger
+
+# Add imgcat to ~/bin
+test -d $HOME/bin || mkdir $HOME/bin
+wget -O ~/bin/imgcat https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat
+
+# Need xQuartz for imlib2
+
+
+
+# Add all preview libraries
+
+brew install libcaca highlight atool lynx w3m elinks poppler transmission mediainfo exiftool imlib2
+
+# Ranger init
+ranger --copy-config=all
+
+# Ranger config
+sed -e "s/set\spreview_images\s.*$/set preview_images true/" ~/.config/ranger/rc.conf > ~/.tmp.tmp \
+    && mv ~/.tmp.tmp ~/.config/ranger/rc.conf
+sed -e "s/set\spreview_images_method.*$/set preview_images_method iterm2/" ~/.config/ranger/rc.conf > ~/.tmp.tmp \
+    && mv ~/.tmp.tmp ~/.config/ranger/rc.conf
+
+# All Ranger Previews
+
+brew install libcaca highlight atool lynx w3m elinks poppler transmission mediainfo exiftool
+
+
 **FIX PYENV**
 
 

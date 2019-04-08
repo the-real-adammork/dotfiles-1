@@ -116,6 +116,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 #exec 2>&3 3>&-
 
 
+export RBENV_ROOT=/usr/local/var/rbenv
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(rbenv init -)"
 

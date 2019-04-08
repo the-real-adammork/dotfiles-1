@@ -3,6 +3,7 @@ module.exports = {
     // http://conqueringthecommandline.com/book/ack_ag
     "ack",
     "ag",
+    "atool",
     // alternative to `cat`: https://github.com/sharkdp/bat
     "bat",
     // Install GNU core utilities (those that come with macOS are outdated)
@@ -11,6 +12,8 @@ module.exports = {
     "dos2unix",
     "diff-so-fancy",
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+    "elinks",
+    "exiftool",
     "ffmpeg",
     "findutils",
     // 'fortune',
@@ -35,15 +38,23 @@ module.exports = {
     "httpie",
     // jq is a sort of JSON grep
     "jq",
+    "highlight",
+    "imlib2",
+    "libcaca",
+    "lynx",
+
     // Mac App Store CLI: https://github.com/mas-cli/mas
     "mas",
+    "mediainfo",
     // Install some other useful utilities like `sponge`
     "moreutils",
     "ncdu",
     "nmap",
     "openconnect",
     "ripgrep",
+    "rbenv",
     "peco",
+    "poppler",
     "python",
     "python@2",
     "reattach-to-user-namespace",
@@ -54,12 +65,14 @@ module.exports = {
     "swiftlint",
     "tig",
     "tmux",
+    "transmission",
     "todo-txt",
     "tree",
     "ttyrec",
     // better, more recent vim
     "vim --with-override-system-vi",
     "watch",
+    "w3m",
     // Install wget with IRI support
     "wget --enable-iri",
     // Need vim from brew to get copy to clipboard, not compiled by default in mac.

@@ -395,7 +395,8 @@ nnoremap } gt
 nnoremap + :tabnew<CR>
 let NERDTreeShowHidden=1
 
-
+" Wrap text in VIM
+command! -nargs=* Wrap set wrap linebreak nolist
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make default paste more useful

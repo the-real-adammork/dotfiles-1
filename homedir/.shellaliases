@@ -104,7 +104,6 @@ alias tdd="todo.sh do"
 # Shorthand git commands
 alias gc='git commit'
 alias gcm='git commit -m '
-alias gco='git checkout'
 alias gps='git push'
 alias gpoh='git push origin HEAD'
 #gcfr = git checkout, git fetch, git reset -- see functions file
