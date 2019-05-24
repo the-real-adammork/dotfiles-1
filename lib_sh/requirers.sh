@@ -78,19 +78,18 @@ function require_apm() {
 }
 
 function sourceNVM(){
-    export NVM_DIR=~/.nvm
-    source $(brew --prefix nvm)/nvm.sh
+    export NVM_DIR="$HOME/.nvm"
+    source "$NVM_DIR/nvm.sh"
 }
 
 
 function require_nvm() {
     mkdir -p ~/.nvm
-    cp $(brew --prefix nvm)/nvm-exec ~/.nvm/
     sourceNVM
     nvm install $1
     if [[ $? != 0 ]]; then
         action "installing nvm"
-        require_brew nvm
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
         . ~/.bashrc
         nvm install $1
     fi

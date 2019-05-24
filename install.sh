@@ -266,8 +266,8 @@ if [[ -d "/Library/Ruby/Gems/2.0.0" ]]; then
   ok
 fi
 
-# node version manager
-require_brew nvm
+# node version manager, no longer recommended to install from brew
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
 # nvm
 require_nvm stable

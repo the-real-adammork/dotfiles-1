@@ -34,3 +34,15 @@
 [submodule "libcaca"]
 	path = libcaca
 	url = git@github.com:cacalabs/libcaca.git
+[submodule "Alcatraz"]
+	path = Alcatraz
+	url = git@github.com:alcatraz/Alcatraz.git
+[submodule "SwiftLintXcode"]
+	path = SwiftLintXcode
+	url = git@github.com:ypresto/SwiftLintXcode.git
+[submodule "SwiftLintForXcode"]
+	path = SwiftLintForXcode
+	url = git@github.com:norio-nomura/SwiftLintForXcode.git
+[submodule "tools-osx"]
+	path = tools-osx
+	url = git@github.com:morgant/tools-osx.git
