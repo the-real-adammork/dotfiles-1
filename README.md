@@ -39,6 +39,20 @@ sed -e "s/set\spreview_images_method.*$/set preview_images_method iterm2/" ~/.co
 
 brew install libcaca highlight atool lynx w3m elinks poppler transmission mediainfo exiftool
 
+**SwiftLintForXcode, AUTOMATE into install.sh**
+
+follow directions here to install into xCode https://github.com/norio-nomura/SwiftLintForXcode
+
+** tools-osx **
+
+```
+cd tools-osx
+rake
+rake install
+```
+
+
+follow directions here to install into xCode https://github.com/norio-nomura/SwiftLintForXcode
 
 **FIX PYENV**
 
