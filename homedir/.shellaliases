@@ -110,6 +110,7 @@ alias gpoh='git push origin HEAD'
 
 # Shorthand alias for my default AG & RG search commands
 alias agd='ag -A 5 -B 5'
+alias aghd='ag -A 5 -B 5 --hidden'
 # ripgrep alias TODO
 
 # vtop default
@@ -117,3 +118,21 @@ alias vtopd='vtop --theme certs'
 
 # open cacao tmux
 alias cacaotmux='cd ~/Projects/wildcacao; tmux new -s cacao'
+
+# Shorthand alias for my default AG & RG search commands
+alias hgr='history | ag '
+
+# PS AUX GREP
+alias psgrep='ps aux | ag '
+
+# xcodebuild shortcuts
+alias selectedxcodebuild='SELECTEDXCODEBUILD=`xcode-select -p`; $SELECTEDXCODEBUILD/usr/bin/xcodebuild '
+
+# xcode debug
+alias xcd='xcode-debug'
+
+# open xcode project file
+alias xcode="open *.xcodeproj"
+
+# zipfolder
+alias zipfolder='tar -zcvf '
