@@ -132,3 +132,16 @@ function fo() {
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
+
+# ranger shortcuts
+#
+# close ranger on file select and write file name to file
+function ranger-select() {
+  ranger --choosefile=$HOME/.rangerfileselect; RSF=`cat $HOME/.rangerfileselect`;
+}
+
+# xCode debug
+#
+xcode-debug() {
+  lldb -p `ps aux | grep Xcode | grep -v grep | awk '{print $2}'`
+}

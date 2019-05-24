@@ -117,7 +117,6 @@ set viminfo+=! " make sure it can save viminfo
 set isk+=_,$,@,%,# " none of these should be word dividers, so make them not be
 set nosol " leave my cursor where it was
 set pastetoggle=<F10>
-set wrap linebreak nolist " line wrap
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups/Sessions
