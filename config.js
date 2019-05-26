@@ -80,6 +80,7 @@ module.exports = {
     "vim",
     "youtube-dl",
     "yank",
+    "zsh-autosuggestions",
     "zsh-syntax-highlighting",
   ],
   cask: [
