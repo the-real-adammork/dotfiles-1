@@ -33,6 +33,7 @@ export CASE_SENSITIVE="true"
 
 # disable weekly auto-update checks
 # export DISABLE_AUTO_UPDATE="true"
+DISABLE_UPDATE_PROMPT=true
 
 # disable colors in ls
 # export DISABLE_LS_COLORS="false"
