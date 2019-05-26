@@ -37,3 +37,7 @@ export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 
 # The next line enables shell command completion for gcloud.
 #source "/Users/$(whoami)/Downloads/google-cloud-sdk/completion.zsh.inc"
+
+# zlib paths
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"

@@ -118,3 +118,6 @@ alias vtopd='vtop --theme certs'
 
 # open cacao tmux
 alias cacaotmux='cd ~/Projects/wildcacao; tmux new -s cacao'
+
+# simple untar
+alias untar='tar -xvf'

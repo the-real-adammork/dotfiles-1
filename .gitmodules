@@ -31,3 +31,12 @@
 [submodule "homedir/.vim/plugged/swift.vim"]
 	path = homedir/.vim/plugged/swift.vim
 	url = git@github.com:keith/swift.vim.git
+[submodule "XVim"]
+	path = XVim
+	url = git@github.com:XVimProject/XVim.git
+[submodule "XVim2"]
+	path = XVim2
+	url = git@github.com:XVimProject/XVim2.git
+[submodule "SwiftLintForXcode"]
+	path = SwiftLintForXcode
+	url = git@github.com:norio-nomura/SwiftLintForXcode.git

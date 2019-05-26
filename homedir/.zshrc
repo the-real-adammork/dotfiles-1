@@ -107,6 +107,7 @@ alias v='f -e vim' # quick opening files with vim
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
 
 # SCM Breeze
 [ -s "/Users/adammork/.scm_breeze/scm_breeze.sh" ] && source "/Users/adammork/.scm_breeze/scm_breeze.sh"

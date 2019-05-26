@@ -43,6 +43,7 @@ module.exports = {
     "nmap",
     "openconnect",
     "ripgrep",
+    "ranger",
     "peco",
     "python",
     "python@2",
