@@ -10,9 +10,6 @@
 [submodule "homedir/.zsh/zsh-autosuggestions"]
 	path = homedir/.zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
-[submodule "xVim"]
-	path = xVim
-	url = https://github.com/XVimProject/XVim2.git
 [submodule "tmux-colors-solarized"]
 	path = tmux-colors-solarized
 	url = https://github.com/seebi/tmux-colors-solarized.git
@@ -37,12 +34,12 @@
 [submodule "Alcatraz"]
 	path = Alcatraz
 	url = git@github.com:alcatraz/Alcatraz.git
-[submodule "SwiftLintXcode"]
-	path = SwiftLintXcode
-	url = git@github.com:ypresto/SwiftLintXcode.git
 [submodule "SwiftLintForXcode"]
 	path = SwiftLintForXcode
 	url = git@github.com:norio-nomura/SwiftLintForXcode.git
 [submodule "tools-osx"]
 	path = tools-osx
 	url = git@github.com:morgant/tools-osx.git
+[submodule "XVim2"]
+	path = XVim2
+	url = git@github.com:XVimProject/XVim2.git

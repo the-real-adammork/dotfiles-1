@@ -33,6 +33,7 @@ export CASE_SENSITIVE="true"
 
 # disable weekly auto-update checks
 # export DISABLE_AUTO_UPDATE="true"
+DISABLE_UPDATE_PROMPT=true
 
 # disable colors in ls
 # export DISABLE_LS_COLORS="false"
@@ -110,6 +111,7 @@ alias v='f -e vim' # quick opening files with vim
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
 
 # SCM Breeze
 [ -s "/Users/adammork/.scm_breeze/scm_breeze.sh" ] && source "/Users/adammork/.scm_breeze/scm_breeze.sh"

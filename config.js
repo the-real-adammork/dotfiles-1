@@ -53,6 +53,7 @@ module.exports = {
     "openconnect",
     "ripgrep",
     "rbenv",
+    "ranger",
     "peco",
     "poppler",
     "python",
