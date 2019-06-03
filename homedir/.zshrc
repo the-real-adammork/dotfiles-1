@@ -17,7 +17,7 @@ POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
 # https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir nvm vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
 # colorcode test
 #
@@ -89,7 +89,7 @@ nvmload() {
   add-zsh-hook chpwd load-nvmrc
   load-nvmrc
 }
-nvmload
+#nvmload
 
 HISTFILESIZE=10000000
 

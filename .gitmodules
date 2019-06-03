@@ -43,3 +43,6 @@
 [submodule "XVim2"]
 	path = XVim2
 	url = git@github.com:XVimProject/XVim2.git
+[submodule "custom/plugins/zsh-syntax-highlighting"]
+	path = custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
