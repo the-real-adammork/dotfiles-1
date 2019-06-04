@@ -16,6 +16,14 @@ set background=light
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+"
+" Re-install every time a Plug is added or removed
+"
+" open vim command prompt 
+"
+" :PluginInstall
+"
+"
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -28,6 +36,7 @@ Plugin 'prettier/vim-prettier'
 " Navigation (IDE frame)
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-fugitive'
@@ -317,10 +326,25 @@ let NERDTreeIgnore=['\.DS_Store$']
 " auto open if no file sent as arg
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Toggle NERDtree with C-n
+" Toggle NERDtree with ,-n
 map ,n <plug>NERDTreeTabsToggle<CR>
 " Autoclose if only NERDtree is left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
