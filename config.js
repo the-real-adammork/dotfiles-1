@@ -4,6 +4,7 @@ module.exports = {
     "ack",
     "ag",
     "atool",
+    "autojump",
     // alternative to `cat`: https://github.com/sharkdp/bat
     "bat",
     // Install GNU core utilities (those that come with macOS are outdated)
