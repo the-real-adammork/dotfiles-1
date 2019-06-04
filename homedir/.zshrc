@@ -1,4 +1,5 @@
 # Performance Logging
+#zmodload zsh/zprof
 #zmodload zsh/datetime
 #setopt PROMPT_SUBST
 #PS4='+$EPOCHREALTIME %N:%i> '
@@ -6,6 +7,7 @@
 #echo "Logging to $logfile"
 #exec 3>&2 2>$logfile
 #setopt XTRACE
+# change
 
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.dotfiles/oh-my-zsh
@@ -17,7 +19,7 @@ POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
 # https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir nvm vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
 # colorcode test
 #
@@ -89,7 +91,7 @@ nvmload() {
   add-zsh-hook chpwd load-nvmrc
   load-nvmrc
 }
-nvmload
+#nvmload
 
 HISTFILESIZE=10000000
 
@@ -116,10 +118,6 @@ eval "$(pyenv init -)"
 # SCM Breeze
 [ -s "/Users/adammork/.scm_breeze/scm_breeze.sh" ] && source "/Users/adammork/.scm_breeze/scm_breeze.sh"
 
-# Performance Logging
-#unsetopt XTRAC#E
-#exec 2>&3 3>&-
-
 
 export RBENV_ROOT=/usr/local/var/rbenv
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -127,4 +125,9 @@ eval "$(rbenv init -)"
 
 [ -s "/Users/adam/.scm_breeze/scm_breeze.sh" ] && source "/Users/adam/.scm_breeze/scm_breeze.sh"
 
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Performance Logging
+#unsetopt XTRAC#E
+#exec 2>&3 3>&-
+#zprof
+
