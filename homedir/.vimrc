@@ -19,7 +19,7 @@ filetype off                  " required
 "
 " Re-install every time a Plug is added or removed
 "
-" open vim command prompt 
+" open vim command prompt
 "
 " :PluginInstall
 "
