@@ -14,3 +14,5 @@ homedir/.vim/bundle/*
 !homedir/.vim/bundle/.gitignore
 !homedir/.vim/bundle/Vundle.vim
 .git_template/hooks/post-commit
+
+tmux_scripts/rcp_average.csv
