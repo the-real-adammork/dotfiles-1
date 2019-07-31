@@ -139,3 +139,12 @@ alias zipfolder='tar -zcvf '
 
 # simple untar
 alias untar='tar -xvf'
+
+# python alias ?
+alias python='python2'
+
+# cd to git root directory
+alias cdgr='cd $(git rev-parse --show-toplevel)'
+
+# my preferred ls combination atm
+alias lst='ls -laht'
