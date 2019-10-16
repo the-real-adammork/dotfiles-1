@@ -32,6 +32,9 @@ export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 # Haskell stacks asked me to add this to my path
 export PATH="/Users/adammork/.local/bin:$PATH"
 
+# Add class-dump from my dotfiles repo
+export PATH="$HOME/.dotfiles/class-dump:$PATH"
+
 
 # GO
 #export PATH=$PATH:/usr/local/opt/go/libexec/bin

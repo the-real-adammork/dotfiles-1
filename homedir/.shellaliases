@@ -110,6 +110,7 @@ alias gpoh='git push origin HEAD'
 
 # Shorthand alias for my default AG & RG search commands
 alias agd='ag -A 5 -B 5'
+alias agx='ag -A 20 -B 20 --hidden'
 alias aghd='ag -A 5 -B 5 --hidden'
 # ripgrep alias TODO
 
@@ -148,3 +149,15 @@ alias cdgr='cd $(git rev-parse --show-toplevel)'
 
 # my preferred ls combination atm
 alias lst='ls -laht'
+
+# get current commit hash
+alias gcur='git rev-parse --verify HEAD | pbcopy'
+
+# get current git branch
+alias gbcur='git rev-parse --abbrev-ref HEAD | pbcopy'
+
+# refresh zshrc
+alias refresh='. ~/.zshrc'
+
+# copyfolder ...
+alias copyfolder='cp -a'
