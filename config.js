@@ -80,6 +80,7 @@ module.exports = {
     "wget --enable-iri",
     // Need vim from brew to get copy to clipboard, not compiled by default in mac.
     "vim",
+    "xclip",
     "youtube-dl",
     "yank",
     "zsh-autosuggestions",

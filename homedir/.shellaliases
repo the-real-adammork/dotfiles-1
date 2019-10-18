@@ -109,9 +109,9 @@ alias gpoh='git push origin HEAD'
 #gcfr = git checkout, git fetch, git reset -- see functions file
 
 # Shorthand alias for my default AG & RG search commands
-alias agd='ag -A 5 -B 5'
+alias agd='ag -A 5 -B 5 --hidden'
 alias agx='ag -A 20 -B 20 --hidden'
-alias aghd='ag -A 5 -B 5 --hidden'
+alias agvd='ag -A 5 -B 5'
 # ripgrep alias TODO
 
 # vtop default
@@ -157,7 +157,13 @@ alias gcur='git rev-parse --verify HEAD | pbcopy'
 alias gbcur='git rev-parse --abbrev-ref HEAD | pbcopy'
 
 # refresh zshrc
-alias refresh='. ~/.zshrc'
+alias refresh='. ~/.profile; . ~/.zshrc'
 
 # copyfolder ...
 alias copyfolder='cp -a'
+
+# default LS command I like to use
+alias lsd='ls -laht '
+
+# shorthand for fzf | pbcopy (yank)
+alias zfy='fzf | sed -z "$ s/\n$//" |pbcopy'
