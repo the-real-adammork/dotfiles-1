@@ -157,7 +157,7 @@ alias gcur='git rev-parse --verify HEAD | pbcopy'
 alias gbcur='git rev-parse --abbrev-ref HEAD | pbcopy'
 
 # refresh zshrc
-alias refresh='. ~/.profile; . ~/.zshrc'
+alias refresh='. ~/.profile; . ~/.zshrc; . ~/.zshenv'
 
 # copyfolder ...
 alias copyfolder='cp -a'
