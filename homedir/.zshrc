@@ -51,6 +51,8 @@ source $ZSH/oh-my-zsh.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Default the shell to global history, local history can be accessed with keyboard toggle
+_per-directory-history-set-global-history
 
 # Customize to your needs...
 unsetopt correct
@@ -130,4 +132,4 @@ eval "$(rbenv init -)"
 #unsetopt XTRAC#E
 #exec 2>&3 3>&-
 #zprof
-
+#
