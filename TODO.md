@@ -30,6 +30,15 @@ Lets explore how to get this working needs:
 - Have them load into the quickfix list ??
 - Find way to rebuild from VIM, are partial build supported ? or build on save ?
 
+##### NeoVim
+
+- might need to try this
+- read articles at the bottom of - https://github.com/reedes/vim-pencil
+
+##### Random VIM
+
+https://www.youtube.com/watch?v=XA2WjJbmmoM&feature=youtu.be
+
 ### CLEANUP
 
 - Remove repo's that are not submodules
