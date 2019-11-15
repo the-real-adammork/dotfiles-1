@@ -35,6 +35,9 @@ export PATH="/Users/adammork/.local/bin:$PATH"
 # Add class-dump from my dotfiles repo
 export PATH="$HOME/.dotfiles/class-dump:$PATH"
 
+# Add sourcekit-lsp
+export PATH="/Users/adammork/.dotfiles/sourcekit-lsp/.build/x86_64-apple-macosx/debug:$PATH"
+
 
 # GO
 #export PATH=$PATH:/usr/local/opt/go/libexec/bin

@@ -151,3 +151,8 @@ function ranger-select() {
 xcode-debug() {
   lldb -p `ps aux | grep Xcode | grep -v grep | awk '{print $2}'`
 }
+
+# open vim with file currently in paste buffer
+vimp() {
+  vim "$('pbpaste')"
+}

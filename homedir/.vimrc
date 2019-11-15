@@ -70,7 +70,7 @@ Plugin 'SuperTab'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
+" prettierInstall L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 " TypeScript
@@ -80,7 +80,8 @@ Plugin 'posva/vim-vue'
 " Copy of the Official Apple Swift VIM Plugin
 Plugin 'bumaociyuan/vim-swift'
 " Ale, async language linting and syntax checking
-Plugin 'w0rp/ale'
+"Plugin 'w0rp/ale'
+Plugin 'file:///Users/adammork/.dotfiles/ale'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,13 +95,30 @@ filetype plugin indent on    " required
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'ryanolsonx/vim-lsp-swift'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', {
     \ 'do': 'npm install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 call plug#end()
 
+"if executable('sourcekit-lsp')
+    "au User lsp_setup call lsp#register_server({
+        "\ 'name': 'sourcekit-lsp',
+        "\ 'cmd': {server_info->['sourcekit-lsp']},
+        "\ 'whitelist': ['swift'],
+        "\ })
+"endif
 
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+
+" for asyncomplete.vim log
+let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 
 " Brief help
@@ -419,6 +437,12 @@ let g:ale_sign_warning = '--'
 " Finish color scheme later
 "highlight ALEWarning ctermbg=Magenta
 
+" In ~/.vim/vimrc, or somewhere similar.
+let g:ale_fixers = {}
+let g:ale_fixers.swift = []
+let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
+let g:ale_javascript_prettier_options = '--use-tabs'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Git Gutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -431,6 +455,8 @@ nmap [h <Plug>GitGutterPrevHunk
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Instant Markdown
@@ -465,3 +491,61 @@ command! -nargs=* Wrap set wrap linebreak nolist
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vnoremap p "_dP
 xnoremap <expr> p 'pgv"'.v:register.'y'
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COC Example VIMRC
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+"nmap <silent> <C-i> <Plug>(coc-range-select)
+"xmap <silent> <C-i> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>

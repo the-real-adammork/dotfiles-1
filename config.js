@@ -16,6 +16,7 @@ module.exports = {
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
     "elinks",
     "exiftool",
+    "fd",
     "ffmpeg",
     "findutils",
     // 'fortune',
@@ -34,6 +35,7 @@ module.exports = {
     "grep --with-default-names",
     // better, more recent grep
     "homebrew/dupes/grep",
+    "hexyl",
     // Because gkze says vtop is gross
     "htop",
     // https://github.com/jkbrzt/httpie
@@ -56,6 +58,7 @@ module.exports = {
     "ripgrep",
     "rbenv",
     "ranger",
+    "pastel",
     "peco",
     "poppler",
     "python",
