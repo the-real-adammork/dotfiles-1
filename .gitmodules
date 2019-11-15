@@ -49,3 +49,21 @@
 [submodule "alacritty"]
 	path = alacritty
 	url = https://github.com/jwilm/alacritty.git
+[submodule "bat-extras"]
+	path = bat-extras
+	url = git@github.com:eth-p/bat-extras.git
+[submodule "sh"]
+	path = sh
+	url = git@github.com:mvdan/sh.git
+[submodule "ripgrep"]
+	path = ripgrep
+	url = git@github.com:BurntSushi/ripgrep.git
+[submodule "base16-xcode"]
+	path = base16-xcode
+	url = git@github.com:kreeger/base16-xcode.git
+[submodule "sourcekit-lsp"]
+	path = sourcekit-lsp
+	url = git@github.com:apple/sourcekit-lsp.git
+[submodule "ale"]
+	path = ale
+	url = git@github.com:dense-analysis/ale.git
