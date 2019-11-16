@@ -37,7 +37,8 @@ Lets explore how to get this working needs:
 
 ##### Random VIM
 
-https://www.youtube.com/watch?v=XA2WjJbmmoM&feature=youtu.be
+- https://www.youtube.com/watch?v=XA2WjJbmmoM&feature=youtu.be
+- Word wrap, default to wrap, and make JK default to move lines that are wrapped.
 
 ### CLEANUP
 
