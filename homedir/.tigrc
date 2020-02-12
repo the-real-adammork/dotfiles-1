@@ -4,3 +4,7 @@
 # Copy commit hash to system clipboard
 bind generic 9 !@sh -c "echo -n %(commit) | sed 's/\-n //g' | tr -d '\n' | pbcopy"
 
+# Apply the current stash
+bind stash A !?git stash apply %(stash)
+
+set main-view-id-display = true

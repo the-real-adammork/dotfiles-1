@@ -109,9 +109,9 @@ alias gpoh='git push origin HEAD'
 #gcfr = git checkout, git fetch, git reset -- see functions file
 
 # Shorthand alias for my default AG & RG search commands
-alias agd='ag -A 5 -B 5 --hidden'
-alias agx='ag -A 20 -B 20 --hidden'
-alias agvd='ag -A 5 -B 5'
+alias Agd='ag -A 5 -B 5 --hidden --ignore "*.xcbuild" --ignore "*.d"'
+alias agd='ag -A 20 -B 20 --hidden --ignore "*.xcbuild" --ignore "*.d"'
+Alias agvd='ag -A 20 -B 20 --ignore *.xcbuild'
 # ripgrep alias TODO
 
 # vtop default
@@ -151,10 +151,19 @@ alias cdgr='cd $(git rev-parse --show-toplevel)'
 alias lst='ls -laht'
 
 # get current commit hash
-alias gcur='git rev-parse --verify HEAD | pbcopy'
+alias gccur='git rev-parse --verify HEAD'
 
 # get current git branch
-alias gbcur='git rev-parse --abbrev-ref HEAD | pbcopy'
+alias gbcur='git rev-parse --abbrev-ref HEAD'
+
+# get current commit hash
+alias gccury='git rev-parse --verify HEAD | pbcopy'
+
+# get current git branch
+alias gbcury='git rev-parse --abbrev-ref HEAD | pbcopy'
+
+#git fetch origin shorthand
+alias gfo='git fetch origin'
 
 # refresh zshrc
 alias refresh='. ~/.profile; . ~/.zshrc; . ~/.zshenv'
@@ -170,3 +179,6 @@ alias zfy='fzf | sed -z "$ s/\n$//" |pbcopy'
 
 # shorthand for batgrep TODO make this a more legit symlink executable type thing in the proper directory, also fix the BAT colors to be solarized light :)
 alias bgr='~/.dotfiles/bat-extras/src/batgrep.sh'
+
+# EXA defaults
+alias exd='exa -l --group-directories-first --all --color always'

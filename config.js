@@ -21,6 +21,7 @@ module.exports = {
     "findutils",
     // 'fortune',
     "fasd",
+    "fswatch",
     "fzf",
     "readline", // ensure gawk gets good readline
     "gawk",

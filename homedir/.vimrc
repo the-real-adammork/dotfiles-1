@@ -1,4 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Must Have
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme solarized
@@ -200,6 +200,20 @@ set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.swp,*.jpg,*.gif,*.png " ignor
 set ruler " Always show current positions along the bottom
 set cmdheight=1 " the command bar is 1 high
 set number " turn on line numbers
+
+" turn hybrid line numbers on
+set number relativenumber
+set nu rnu
+
+
+noremap <silent> <Leader>h :call ToggleHybridLine()<CR>
+function ToggleHybridLine()
+  " toggle hybrid line numbers
+  set number! relativenumber!
+  set nu! rnu!
+endfunction
+
+
 set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set hid " you can change buffer without saving
 set backspace=2 " make backspace work normal
@@ -236,7 +250,7 @@ set tabstop=2 " real tabs should be 4, but they will show with set list on
 set expandtab
 set copyindent " but above all -- follow the conventions laid before us
 " wrap lines at 120 chars. 80 is somewhat antiquated with nowadays displays.
-set textwidth=120
+set textwidth=180
 filetype plugin indent on " load filetype plugins and indent settings
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -319,8 +333,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" map <up> <ESC>:bp<RETURN> " left arrow (normal mode) switches buffers
-" map <down> <ESC>:bn<RETURN> " right arrow (normal mode) switches buffers
+map <up> <ESC>:bp<RETURN> " left arrow (normal mode) switches buffers
+map <down> <ESC>:bn<RETURN> " right arrow (normal mode) switches buffers
+let NERDTreeQuitOnOpen = 0
 " map <right> <ESC>:Tlist<RETURN> " show taglist
 " map <left> <ESC>:NERDTreeToggle<RETURN>  " moves left fa split
 " map <F2> <ESC>ggVG:call SuperRetab()<left>
@@ -371,6 +386,7 @@ vnoremap <silent> <leader>es :EsformatterVisual<CR>
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeShowHidden=1
+let NERDTreeSortOrder=['\/$','*','[[-timestamp]]']
 let NERDTreeIgnore=['\.DS_Store$']
 " auto open if no file sent as arg
 autocmd StdinReadPre * let s:std_in=1
@@ -481,10 +497,24 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 nnoremap { gT
 nnoremap } gt
 nnoremap + :tabnew<CR>
-let NERDTreeShowHidden=1
 
 " Wrap text in VIM
 command! -nargs=* Wrap set wrap linebreak nolist
+
+" https://stackoverflow.com/questions/20975928/moving-the-cursor-through-long-soft-wrapped-lines-in-vim
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
+
+noremap <silent> <Leader>w :call ToggleWrap()<CR>
+function ToggleWrap()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+  endif
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make default paste more useful

@@ -19,7 +19,14 @@ POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
 # https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+
+vimode(){
+    echo $(vi_mode_prompt_info)
+}
+
+POWERLEVEL9K_CUSTOM_VIMODE="vimode"
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vcs custom_vimode newline dir)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
 # colorcode test
 #
@@ -45,14 +52,17 @@ export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(colorize compleat dirpersist autojump gulp history cp zsh-autosuggestions history-substring-search  zsh-syntax-highlighting per-directory-history)
+#
+
+
+plugins=(colorize compleat dirpersist autojump gulp history cp zsh-autosuggestions history-substring-search  zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Default the shell to global history, local history can be accessed with keyboard toggle
-_per-directory-history-set-global-history
+#_per-directory-history-set-global-history
 
 # Customize to your needs...
 unsetopt correct
@@ -110,8 +120,8 @@ fh() {
 }
 
 # Add aliases and convenience calls for - fasd
-eval "$(fasd --init auto)"
-alias v='f -e vim' # quick opening files with vim
+#eval "$(fasd --init auto)"
+#alias v='f -e vim'  quick opening files with vim
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -127,6 +137,59 @@ eval "$(rbenv init -)"
 
 [ -s "/Users/adam/.scm_breeze/scm_breeze.sh" ] && source "/Users/adam/.scm_breeze/scm_breeze.sh"
 
+#
+#
+#
+#
+#
+#       VIM Editing Mode
+#
+#
+#
+#
+#
+
+bindkey -v
+
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
+
+
+# `v` is already mapped to visual mode, so we need to use a different key to
+# open Vim
+bindkey -M vicmd "^V" edit-command-line
+
+export EDITOR='vim'
+
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-keymap-select
+
+bindkey -v '^?' backward-delete-char
+
+function vi_mode_prompt_info() {
+  echo "${${KEYMAP/vicmd/% NORMAL }/(main|viins)/% INSERT %}"
+}
+
+# define right prompt, regardless of whether the theme defined it
+RPS1='$(vi_mode_prompt_info)'
+RPS2=$RPS1
+
+#
+#
+#
+#
+#
+#       Performance
+#
+#
+#
+#
+#
 
 # Performance Logging
 #unsetopt XTRAC#E
