@@ -108,16 +108,16 @@ nvmload() {
 HISTFILESIZE=10000000
 
 # fhr - Add a history repeat search using fzf, runs the command
-fhr() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
-}
+#fhr() {
+  #eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+#}
 
-# fh - repeat history edit, drops the command into command line !
-writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
+## fh - repeat history edit, drops the command into command line !
+#writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
 
-fh() {
-  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | writecmd
-}
+#fh() {
+  #([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | writecmd
+#}
 
 # Add aliases and convenience calls for - fasd
 #eval "$(fasd --init auto)"
@@ -162,22 +162,52 @@ bindkey -M vicmd "^V" edit-command-line
 export EDITOR='vim'
 
 # Updates editor information when the keymap changes.
-function zle-keymap-select() {
-  zle reset-prompt
-  zle -R
+#function zle-keymap-select() {
+  #zle reset-prompt
+  #zle -R
+#}
+
+#zle -N zle-keymap-select
+
+
+function zle-keymap-select zle-line-init
+{
+    # change cursor shape in iTerm2
+    case $KEYMAP in
+        vicmd)      print -n -- "\E]50;CursorShape=0\C-G";;  # block cursor
+        viins|main) print -n -- "\E]50;CursorShape=1\C-G";;  # line cursor
+    esac
+
+    zle reset-prompt
+    zle -R
 }
 
+function zle-line-finish
+{
+    print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
+}
+
+zle -N zle-line-init
+zle -N zle-line-finish
 zle -N zle-keymap-select
 
 bindkey -v '^?' backward-delete-char
+
+# Hardcode the fzf-history-widget binding to work in -v (vi insert) and -a (vi normal) modes.
+bindkey -v '^r' fzf-history-widget
+bindkey -a '^r' fzf-history-widget
+
+# Hardcode the fzf-cd-widget binding to work in -v (vi insert) and -a (vi normal) modes.
+# bindkey -v '^t' fzf-cd-widget
+# bindkey -a '^t' fzf-cd-widget
 
 function vi_mode_prompt_info() {
   echo "${${KEYMAP/vicmd/% NORMAL }/(main|viins)/% INSERT %}"
 }
 
 # define right prompt, regardless of whether the theme defined it
-RPS1='$(vi_mode_prompt_info)'
-RPS2=$RPS1
+#RPS1='$(vi_mode_prompt_info)'
+#RPS2=$RPS1
 
 #
 #
