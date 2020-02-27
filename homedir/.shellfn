@@ -173,3 +173,7 @@ function tmux-startup() {
   tmux new -s 4_17 -c ~/Projects/workspace-cma/4.17/cma -d
   tmux new -s 4_18 -c ~/Projects/workspace-cma/4.18/cma -d
 }
+
+function hy() {
+  history | fzf --height 40% --layout=reverse --border --tac --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'
+}
