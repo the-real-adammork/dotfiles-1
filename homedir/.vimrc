@@ -107,13 +107,13 @@ Plug 'prettier/vim-prettier', {
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 call plug#end()
 
-"if executable('sourcekit-lsp')
-    "au User lsp_setup call lsp#register_server({
-        "\ 'name': 'sourcekit-lsp',
-        "\ 'cmd': {server_info->['sourcekit-lsp']},
-        "\ 'whitelist': ['swift'],
-        "\ })
-"endif
+if executable('sourcekit-lsp')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'sourcekit-lsp',
+        \ 'cmd': {server_info->['sourcekit-lsp']},
+        \ 'whitelist': ['swift'],
+        \ })
+endif
 
 let g:lsp_log_verbose = 1
 let g:lsp_log_file = expand('~/vim-lsp.log')
@@ -251,7 +251,7 @@ set tabstop=2 " real tabs should be 4, but they will show with set list on
 set expandtab
 set copyindent " but above all -- follow the conventions laid before us
 " wrap lines at 120 chars. 80 is somewhat antiquated with nowadays displays.
-set textwidth=180
+"set textwidth=180
 filetype plugin indent on " load filetype plugins and indent settings
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -260,13 +260,18 @@ filetype plugin indent on " load filetype plugins and indent settings
 set fo=tcrq " See Help (complex)
 set shiftround " when at 3 spaces, and I hit > ... go to 4, not 5
 set expandtab " no real tabs!
-set nowrap " do not wrap line
+set wrap linebreak nolist
+"set nowrap " do not wrap line
 set preserveindent " but above all -- follow the conventions laid before us
 set ignorecase " case insensitive by default
 set smartcase " if there are caps, go case-sensitive
 set completeopt=menu,longest,preview " improve the way autocomplete works
 set cursorcolumn " show the current column
 set cursorline
+
+" turn on spellcheck
+autocmd BufRead,BufNewFile *.md setlocal spell
+"set spellfile=$HOME/.dotfiles/vim/spell/en.utf-8.add
 
 " Minimum 5 lines above or below the cursor
 set scrolloff=5
@@ -305,6 +310,17 @@ set foldopen-=undo " don't open folds when you undo stuff
 "let Tlist_File_Fold_Auto_Close = 0 " Do not close tags for other files
 "let Tlist_Enable_Fold_Column = 1 " Do show folding tree
 "let Tlist_WinWidth = 50 " 50 cols wide, so I can (almost always) read my functions
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" sourcekit-lsp
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+map \ld :LspDefinition<cr>
+map \ld :LspDefinition<cr>
+map \[ <ESC>:bp<RETURN> " leader bracket (normal mode) switches buffers
+map \] <ESC>:bn<RETURN> " leader bracket (normal mode) switches buffers
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Matchit
@@ -411,6 +427,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+map ,nf :NERDTreeFind<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
@@ -532,7 +549,9 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Leader + o  opens a default FZFConfiguration.
 nnoremap <silent> <expr> <Leader>o (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZFDefault\<cr>"
+nnoremap <silent> <expr> <Leader>oa (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZFAllDefault\<cr>"
 command! -nargs=*  FZFDefault :call fzf#run({'source': 'rg --hidden -l ""', 'sink': 'e'})
+command! -nargs=*  FZFAllDefault :call fzf#run({'source': 'rg --hidden -l ""', 'sink': 'e'})
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Instant Markdown
