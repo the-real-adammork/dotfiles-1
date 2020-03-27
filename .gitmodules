@@ -64,3 +64,6 @@
 [submodule "ale"]
 	path = ale
 	url = git@github.com:dense-analysis/ale.git
+[submodule "next"]
+	path = next
+	url = git@github.com:atlas-engineer/next.git

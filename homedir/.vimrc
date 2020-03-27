@@ -99,6 +99,7 @@ Plug 'junegunn/fzf'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'ryanolsonx/vim-lsp-swift'
+Plug 'dyng/ctrlsf.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " post install (yarn install | npm install) then load plugin only for editing supported files
@@ -112,6 +113,17 @@ if executable('sourcekit-lsp')
         \ 'name': 'sourcekit-lsp',
         \ 'cmd': {server_info->['sourcekit-lsp']},
         \ 'whitelist': ['swift'],
+        \ })
+endif
+
+" Ruby LSP
+if executable('solargraph')
+    " gem install solargraph
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
         \ })
 endif
 
@@ -271,7 +283,7 @@ set cursorline
 
 " turn on spellcheck
 autocmd BufRead,BufNewFile *.md setlocal spell
-"set spellfile=$HOME/.dotfiles/vim/spell/en.utf-8.add
+set spellfile=$HOME/.dotfiles/homedir/.vim/spell/en.utf-8.add
 
 " Minimum 5 lines above or below the cursor
 set scrolloff=5
@@ -313,11 +325,13 @@ set foldopen-=undo " don't open folds when you undo stuff
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" sourcekit-lsp
+" lsp
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 map \ld :LspDefinition<cr>
-map \ld :LspDefinition<cr>
+map \lr :LspReferences<cr>
+
+
 map \[ <ESC>:bp<RETURN> " leader bracket (normal mode) switches buffers
 map \] <ESC>:bn<RETURN> " leader bracket (normal mode) switches buffers
 
@@ -552,6 +566,22 @@ nnoremap <silent> <expr> <Leader>o (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" 
 nnoremap <silent> <expr> <Leader>oa (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZFAllDefault\<cr>"
 command! -nargs=*  FZFDefault :call fzf#run({'source': 'rg --hidden -l ""', 'sink': 'e'})
 command! -nargs=*  FZFAllDefault :call fzf#run({'source': 'rg --hidden -l ""', 'sink': 'e'})
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CtrlSF
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap     \sf <Plug>CtrlSFPrompt
+vmap     \sf <Plug>CtrlSFVwordPath
+vmap     \sF <Plug>CtrlSFVwordExec
+nmap     \sn <Plug>CtrlSFCwordPath
+nmap     \sp <Plug>CtrlSFPwordPath
+nnoremap \so :CtrlSFOpen<CR>
+nnoremap \st :CtrlSFToggle<CR>
+inoremap \st <Esc>:CtrlSFToggle<CR>
+
+let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_winsize = '50%'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Instant Markdown
