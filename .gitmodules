@@ -25,9 +25,27 @@
 [submodule "homedir/.tmux/plugins/tmux-resurrect"]
 	path = homedir/.tmux/plugins/tmux-resurrect
 	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule "homedir/.tmux/plugins/tmux-continuum"]
+	path = homedir/.tmux/plugins/tmux-continuum
+	url = https://github.com/tmux-plugins/tmux-continuum
+[submodule "homedir/.tmux/plugins/tmux-sensible"]
+	path = homedir/.tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible
 [submodule "homedir/.vim/plugged/swift.vim"]
 	path = homedir/.vim/plugged/swift.vim
 	url = git@github.com:keith/swift.vim.git
+[submodule "homedir/.vim/plugged/async.vim"]
+	path = homedir/.vim/plugged/async.vim
+	url = git@github.com:prabirshrestha/async.vim.git
+[submodule "homedir/.vim/plugged/coc.vim"]
+	path = homedir/.vim/plugged/coc.nvim
+	url = git@github.com:neoclide/coc.nvim.git
+[submodule "homedir/.vim/plugged/ctrlsf.vim"]
+	path = homedir/.vim/plugged/ctrlsf.vim
+	url = git@github.com:dyng/ctrlsf.vim.git
+[submodule "homedir/.vim/plugged/fzf.vim"]
+	path = homedir/.vim/plugged/fzf.vim
+	url = git@github.com:junegunn/fzf.vim.git
 [submodule "libcaca"]
 	path = libcaca
 	url = git@github.com:cacalabs/libcaca.git
