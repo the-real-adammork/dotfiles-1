@@ -61,9 +61,6 @@
 [submodule "sourcekit-lsp"]
 	path = sourcekit-lsp
 	url = git@github.com:apple/sourcekit-lsp.git
-[submodule "ale"]
-	path = ale
-	url = git@github.com:dense-analysis/ale.git
 [submodule "next"]
 	path = next
 	url = git@github.com:atlas-engineer/next.git
