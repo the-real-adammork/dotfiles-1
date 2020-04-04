@@ -25,9 +25,9 @@
 [submodule "SwiftLintForXcode"]
 	path = SwiftLintForXcode
 	url = git@github.com:norio-nomura/SwiftLintForXcode.git
-[submodule "tools-osx"]
-	path = tools-osx
-	url = git@github.com:morgant/tools-osx.git
+;[submodule "tools-osx"]
+	;path = tools-osx
+	;url = git@github.com:morgant/tools-osx.git
 [submodule "XVim2"]
 	path = XVim2
 	url = git@github.com:XVimProject/XVim2.git
