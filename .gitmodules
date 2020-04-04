@@ -46,6 +46,18 @@
 [submodule "homedir/.vim/plugged/fzf.vim"]
 	path = homedir/.vim/plugged/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
+[submodule "homedir/.vim/plugged/fzf"]
+	path = homedir/.vim/plugged/fzf
+	url = git@github.com:junegunn/fzf.git
+[submodule "homedir/.vim/plugged/vim-lsp"]
+	path = homedir/.vim/plugged/vim-lsp
+	url = git@github.com:prabirshrestha/vim-lsp.git
+[submodule "homedir/.vim/plugged/vim-lsp-swift"]
+	path = homedir/.vim/plugged/vim-lsp-swift
+	url = git@github.com:ryanolsonx/vim-lsp-swift.git
+[submodule "homedir/.vim/plugged/vim-prettier"]
+	path = homedir/.vim/plugged/vim-prettier
+	url = git@github.com:ryanolsonx/vim-prettier.git
 [submodule "libcaca"]
 	path = libcaca
 	url = git@github.com:cacalabs/libcaca.git
