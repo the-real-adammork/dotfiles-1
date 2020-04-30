@@ -55,3 +55,6 @@
 [submodule "next"]
 	path = next
 	url = git@github.com:atlas-engineer/next.git
+[submodule "tools-osx"]
+	path = tools-osx
+	url = git@github.com:morgant/tools-osx.git
