@@ -10,6 +10,7 @@
 # change
 
 # Path to your oh-my-zsh configuration.
+export TERM="xterm-256color"
 export ZSH=$HOME/.dotfiles/oh-my-zsh
 # if you want to use this, change your non-ascii font to Droid Sans Mono for Awesome
 # POWERLEVEL9K_MODE='awesome-patched'
@@ -55,7 +56,7 @@ export DISABLE_AUTO_TITLE="true"
 #
 
 
-plugins=(colorize compleat dirpersist autojump gulp history cp zsh-autosuggestions history-substring-search  zsh-syntax-highlighting)
+plugins=(z colorize compleat dirpersist autojump gulp history cp zsh-autosuggestions history-substring-search  zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -128,7 +129,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 
 # SCM Breeze
-[ -s "/Users/adammork/.scm_breeze/scm_breeze.sh" ] && source "/Users/adammork/.scm_breeze/scm_breeze.sh"
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
 
 export RBENV_ROOT=/usr/local/var/rbenv
@@ -209,6 +210,11 @@ function vi_mode_prompt_info() {
 #RPS1='$(vi_mode_prompt_info)'
 #RPS2=$RPS1
 
+# Bat config
+#
+export BAT_CONFIG_PATH="/Users/adam/.dotfiles/homedir"
+
+
 #
 #
 #
@@ -226,3 +232,9 @@ function vi_mode_prompt_info() {
 #exec 2>&3 3>&-
 #zprof
 #
+
+# dir env, move later
+eval "$(direnv hook zsh)"
+
+# chnode, move later
+source /usr/local/opt/chnode/share/chnode/chnode.sh

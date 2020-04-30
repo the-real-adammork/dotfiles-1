@@ -11,6 +11,8 @@ homedir/.vim/temp/*
 !homedir/.vim/temp/.gitignore
 homedir/.vim/.netrwhist
 homedir/.vim/bundle/*
+homedir/.vim/plugged/*
+homedir/.tmux/plugins/*
 !homedir/.vim/bundle/.gitignore
 !homedir/.vim/bundle/Vundle.vim
 .git_template/hooks/post-commit

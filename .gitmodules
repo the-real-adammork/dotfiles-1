@@ -19,24 +19,15 @@
 [submodule "xCode-Solarized"]
 	path = xCode-Solarized
 	url = git@github.com:dm-z/xCode-Solarized.git
-[submodule "homedir/.tmux/plugins/tpm"]
-	path = homedir/.tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
-[submodule "homedir/.tmux/plugins/tmux-resurrect"]
-	path = homedir/.tmux/plugins/tmux-resurrect
-	url = https://github.com/tmux-plugins/tmux-resurrect
-[submodule "homedir/.vim/plugged/swift.vim"]
-	path = homedir/.vim/plugged/swift.vim
-	url = git@github.com:keith/swift.vim.git
 [submodule "libcaca"]
 	path = libcaca
 	url = git@github.com:cacalabs/libcaca.git
 [submodule "SwiftLintForXcode"]
 	path = SwiftLintForXcode
 	url = git@github.com:norio-nomura/SwiftLintForXcode.git
-[submodule "tools-osx"]
-	path = tools-osx
-	url = git@github.com:morgant/tools-osx.git
+;[submodule "tools-osx"]
+	;path = tools-osx
+	;url = git@github.com:morgant/tools-osx.git
 [submodule "XVim2"]
 	path = XVim2
 	url = git@github.com:XVimProject/XVim2.git
@@ -61,9 +52,9 @@
 [submodule "sourcekit-lsp"]
 	path = sourcekit-lsp
 	url = git@github.com:apple/sourcekit-lsp.git
-[submodule "ale"]
-	path = ale
-	url = git@github.com:dense-analysis/ale.git
 [submodule "next"]
 	path = next
 	url = git@github.com:atlas-engineer/next.git
+[submodule "tools-osx"]
+	path = tools-osx
+	url = git@github.com:morgant/tools-osx.git

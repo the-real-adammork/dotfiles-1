@@ -34,13 +34,13 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 
 # Haskell stacks asked me to add this to my path
-export PATH="/Users/adammork/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Add class-dump from my dotfiles repo
 export PATH="$HOME/.dotfiles/class-dump:$PATH"
 
 # Add sourcekit-lsp
-export PATH="/Users/adammork/.dotfiles/sourcekit-lsp/.build/x86_64-apple-macosx/debug:$PATH"
+export PATH="$HOME/.dotfiles/sourcekit-lsp/.build/x86_64-apple-macosx/debug:$PATH"
 
 
 # GO
@@ -58,3 +58,9 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include"
 
 # Fastlane
 export PATH="$HOME/.fastlane/bin:$PATH"
+
+# Downloader script TODO - Put in Dotfiles proper
+export PATH="$PATH:$HOME/Projects/youtubedownloader"
+
+# Add xhyve ?
+export PATH="$PATH:$(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve"
