@@ -135,7 +135,7 @@ alias selectedxcodebuild='SELECTEDXCODEBUILD=`xcode-select -p`; $SELECTEDXCODEBU
 alias xcd='xcode-debug'
 
 # open xcode project file
-alias xcode="open *.xcodeproj"
+alias xcode="find . -regex '.*\.xcodeproj$' -not -path "*Carthage*" -not -path "*Pods*" -maxdepth 4"
 
 # zipfolder
 alias zipfolder='tar -zcvf '
