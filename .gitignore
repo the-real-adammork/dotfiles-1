@@ -22,3 +22,5 @@ homedir/.tmux/plugins/*
 tmux_scripts/rcp_average.csv
 homedir/.tmux/resurrect/*.txt
 homedir/.tmux/
+
+tmux.*\.log
