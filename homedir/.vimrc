@@ -10,6 +10,8 @@ call togglebg#map("<F5>")
 " Always use light
 set background=light
 
+let $PAGER=''
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -80,8 +82,8 @@ Plugin 'posva/vim-vue'
 " Copy of the Official Apple Swift VIM Plugin
 Plugin 'bumaociyuan/vim-swift'
 " Ale, async language linting and syntax checking
-"Plugin 'w0rp/ale'
-Plugin 'file:///Users/adammork/.dotfiles/ale'
+Plugin 'dense-analysis/ale'
+"Plugin 'file:///Users/adammork/.dotfiles/ale'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -488,8 +490,14 @@ let g:ale_sign_warning = '--'
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {}
 let g:ale_fixers.swift = []
+let g:ale_fixers.javascript = ['eslint']
 let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
 let g:ale_javascript_prettier_options = '--use-tabs'
+
+" Do not lint or fix minified files.
+let g:ale_pattern_options = {
+\ '\.envrc': {'ale_linters': ['sh'], 'ale_fixers': []},
+\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Git Gutter
