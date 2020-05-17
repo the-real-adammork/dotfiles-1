@@ -5,7 +5,8 @@
 ._*
 id_rsa
 node_modules
-homedire/.gitconfig
+homedir/.tmux/resurrect/last
+homedir/.gitconfig
 homedir/.vim/backup/*
 !homedir/.vim/backup/.gitignore
 homedir/.vim/temp/*
