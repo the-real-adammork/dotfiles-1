@@ -1,4 +1,7 @@
 <!-- TODO -->
+install prettier
+`npm install prettier -g`
+
 remove rube crap from powerline
 Double check this works on new install - https://github.com/seebi/tmux-colors-solarized
 https://github.com/tmux-plugins/tpm
