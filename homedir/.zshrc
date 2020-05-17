@@ -224,8 +224,6 @@ export BAT_CONFIG_PATH="/Users/adam/.dotfiles/homedir"
 #
 #
 #
-#
-#
 
 # Performance Logging
 #unsetopt XTRAC#E
@@ -237,4 +235,4 @@ export BAT_CONFIG_PATH="/Users/adam/.dotfiles/homedir"
 eval "$(direnv hook zsh)"
 
 # chnode, move later
-source /usr/local/opt/chnode/share/chnode/chnode.sh
+source /usr/local/bin/chnode

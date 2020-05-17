@@ -64,3 +64,6 @@ export PATH="$PATH:$HOME/Projects/youtubedownloader"
 
 # Add xhyve ?
 export PATH="$PATH:$(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve"
+
+# Git home
+export GITHOME=$(git rev-parse --show-toplevel)

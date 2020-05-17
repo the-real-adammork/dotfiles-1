@@ -357,6 +357,12 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Convenience wrapper to open the buffer list
+nnoremap gb :ls<CR>:b<Space>
+
+" quicker save
+noremap <Leader>s :update<CR>
+
 " Make square brackets cycle to next and previous buffers
 
 " Make control + hjkl jump to different VIM windows
