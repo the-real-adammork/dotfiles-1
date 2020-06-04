@@ -111,8 +111,8 @@ alias gpoh='git push origin HEAD'
 #gcfr = git checkout, git fetch, git reset -- see functions file
 
 # Shorthand alias for my default AG & RG search commands
-alias Agd='ag -A 5 -B 5 --hidden --ignore "*.xcbuild" --ignore "*.d"'
-alias agd='ag -A 20 -B 20 --hidden --ignore "*.xcbuild" --ignore "*.d"'
+alias Agd='ag -A 5 -B 5 --hidden --ignore ".git/*" --ignore "*.xcbuild" --ignore "*.d"'
+alias agd='ag -A 20 -B 20 --hidden --ignore ".git/*" --ignore "*.xcbuild" --ignore "*.d"'
 Alias agvd='ag -A 20 -B 20 --ignore *.xcbuild'
 # ripgrep alias TODO
 

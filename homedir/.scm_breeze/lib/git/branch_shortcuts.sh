@@ -18,7 +18,7 @@ function _scmb_git_branch_shortcuts {
   fail_if_not_git_repo || return 1
 
   # Fall back to normal git branch, if any unknown args given
-  if [[ "$($_git_cmd branch | wc -l)" -gt 300 ]] || ([[ -n "$@" ]] && [[ "$@" != "-a" ]] && [[ "$@" != "--list *$defaultbranch*" ]]); then
+  if [[ "$($_git_cmd branch --sort=-committerdate  | wc -l)" -gt 300 ]] || ([[ -n "$@" ]] && [[ "$@" != "-a" ]] && [[ "$@" != "--list *$defaultbranch*" ]]); then
     exec_scmb_expand_args $_git_cmd branch "$@"
     return 1
   fi
@@ -36,7 +36,7 @@ EOF
 
   # Set numbered file shortcut in variable
   local e=1 IFS=$'\n'
-  for branch in $($_git_cmd branch "$@" | sed "s/^[* ]\{2\}//"); do
+  for branch in $($_git_cmd branch --sort=-committerdate  "$@" | sed "s/^[* ]\{2\}//"); do
     export $git_env_char$e="$branch"
     if [ "${scmbDebug:-}" = "true" ]; then echo "Set \$$git_env_char$e  => $file"; fi
     let e++
