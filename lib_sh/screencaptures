@@ -1,0 +1,170 @@
+#!/bin/bash
+
+usage()
+{
+    echo "usage: screencaptures [-w watch] | [-p process] | [-h]"
+    echo -e "  -w to watch for changes on the desktop, -p <file> to process"
+    echo "  -h    help"
+}
+
+##### Main
+
+mode=""
+
+# Check for valid number of aguments
+if [ $# -le 0 ]; then
+  echo "Your command contains no arguments"
+  usage
+  exit
+fi
+
+# Check for valid options
+while [ "$1" != "" ]; do
+    case $1 in
+        -w | --watch )           shift
+                                MODE="watch"
+                                ;;
+        -p | --process )        shift
+                                MODE="process"
+                                INPUT=$1
+                                ;;
+        -h | --help )           usage
+                                exit
+                                ;;
+        * )                     usage
+                                exit 1
+    esac
+    shift
+done
+
+REPO_ROOT_DIR="$(git rev-parse --show-toplevel)"
+cd $REPO_ROOT_DIR
+
+echo "Screencaptures"
+
+watch() {
+	echo "Watching ..."
+	if ! [ -x "$(command -v fswatch)" ]; then
+  	echo 'Error: fswatch is not installed. install from brew with `brew install fswatch`' >&2
+  	exit 1
+	fi
+	if ! [ -x "$(command -v ffmpeg)" ]; then
+  	echo 'Error: ffmpeg is not installed. install from brew with `brew install ffmpeg`' >&2
+  	exit 1
+	fi
+
+
+  # Start one fswatch for copy paste via cli
+  fswatch ~/Desktop -0 --include='/[^.][^/]*\.MOV$' --include='/[^.][^/]*\.mov$' --include='/[^.][^/]*\.MP4$' --include='/[^.][^/]*\.mp4$' --exclude=".*" --event PlatformSpecific --event Updated --event OwnerModified --event AttributeModified --event IsFile | xargs -0 -I {} $(path4script) -p {}
+}
+
+# get path to the currently running script
+path4script() {
+	prg=$0
+	if [ ! -e "$prg" ]; then
+  	case $prg in
+    	(*/*) exit 1;;
+    	(*) prg=$(command -v -- "$prg") || exit;;
+  	esac
+	fi
+	dir=$(
+  	cd -P -- "$(dirname -- "$prg")" && pwd -P
+	) || exit
+	prg=$dir/$(basename -- "$prg") || exit
+
+	printf '%s\n' "$prg"
+}
+
+convertVideoToSize() {
+  bitrate="$(awk "BEGIN {print int($3 * 1024 * 1024 * 8 / $(ffprobe \
+      -v error \
+      -show_entries format=duration \
+      -of default=noprint_wrappers=1:nokey=1 \
+      "$1" \
+  ) / 1000)}")k"
+  ffmpeg \
+      -y \
+      -i "$1" \
+      -c:v libx264 \
+      -preset medium \
+      -b:v $bitrate \
+      -pass 1 \
+      -an \
+      -f mp4 \
+      /dev/null \
+  && \
+  ffmpeg \
+      -i "$1" \
+      -c:v libx264 \
+      -preset medium \
+      -b:v $bitrate \
+      -pass 2 \
+      -an \
+      "$2"
+}
+
+convertVideoToGif() {
+  # Generates several versions using a sliding scale of sizes
+  DIMENSIONS=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$1")
+  WIDTH=$(echo $DIMENSIONS | cut -f1 -dx)
+  HEIGHT=$(echo $DIMENSIONS | cut -f2 -dx)
+  FPS=20
+
+  if [[ ($WIDTH -gt 0 || $HEIGHT -gt 0) ]]; then
+    ffmpeg -y -i "$1" -vf 'scale=if(gte(iw\,ih)\,min(540\,iw)\,-2):if(lt(iw\,ih)\,min(540\,ih)\,-2)'  -pix_fmt rgb8 -r $FPS -f gif "$2_mini.gif"
+  fi
+  if [[ ($WIDTH -gt 540 || $HEIGHT -gt 540) ]]; then
+    ffmpeg -y -i "$1" -vf 'scale=if(gte(iw\,ih)\,min(720\,iw)\,-2):if(lt(iw\,ih)\,min(720\,ih)\,-2)'  -pix_fmt rgb8 -r $FPS -f gif "$2_small.gif"
+  fi
+  if [[ ($WIDTH -gt 720 || $HEIGHT -gt 720) ]]; then
+    ffmpeg -y -i "$1" -vf 'scale=if(gte(iw\,ih)\,min(1024\,iw)\,-2):if(lt(iw\,ih)\,min(1024\,ih)\,-2)'  -pix_fmt rgb8 -r $FPS -f gif "$2_medium.gif"
+  fi
+  if [[ ($WIDTH -gt 1024 || $HEIGHT -gt 1024) ]]; then
+    ffmpeg -y -i "$1" -vf 'scale=if(gte(iw\,ih)\,min(1280\,iw)\,-2):if(lt(iw\,ih)\,min(1280\,ih)\,-2)'  -pix_fmt rgb8 -r $FPS -f gif "$2_large.gif"
+  fi
+
+  # Tried to deterministically generate with dimensions based on size*duration*fps
+  # ... but file sizes were all over the place 5mb - 500mb depending on content.
+}
+if [ $MODE = "process" ]; then
+  # check that file is valid
+  sleep 2
+  if [ ! -f "$INPUT" ]; then
+    printf "File \"$INPUT\" doesn't exist!! \n\n"
+    exit 1
+  fi
+  printf "\n\n File is valid, continuing... \n\n"
+
+  # define parameters
+  SIZE=24
+  BASENAME=$(basename "$INPUT" ".mov")
+  BASENAME=$(basename "$BASENAME" ".MOV")
+  BASENAME=$(basename "$BASENAME" ".mp4")
+  BASENAME=$(basename "$BASENAME" ".MP4")
+  DIRNAME=$(dirname "$INPUT")
+  OUTPUT="$BASENAME-$SIZE mB.mp4"
+  GIFINPUT="$OUTPUT"
+  GIFBASE="$BASENAME"
+
+  printf "\n\nConverting video to a new video with a maximum size of $SIZE\n\n"
+  printf $OUTPUT
+  printf $INPUT
+
+
+
+  convertVideoToSize "$INPUT" "$OUTPUT" $SIZE
+
+  convertVideoToGif "$INPUT" "$DIRNAME/$GIFBASE"
+  mv "$GIFOUTPUT" "$DIRNAME/$GIFOUTPUT"
+
+  printf "\n\nCompressing video to a .zip file with name $DIRNAME/$BASENAME.zip\n\n"
+  zip -j "$DIRNAME/$BASENAME.zip" "$OUTPUT"
+
+  rm "$OUTPUT"
+
+  printf "\n\n Processing complete, stil watching... \n\n"
+elif  [ $MODE = "watch" ]; then
+	watch
+else
+  usage
+fi

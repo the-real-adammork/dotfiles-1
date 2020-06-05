@@ -160,7 +160,13 @@ set isk+=_,$,@,%,# " none of these should be word dividers, so make them not be
 set nosol " leave my cursor where it was
 set pastetoggle=<F10>
 imap kj <Esc> " make shift enter exit insert mode to normal mode, should make exiting faster because VIM isnt waiting for a key combination tied to <esc>
+set shell=/usr/local/bin/zsh
 
+
+" Edit vimr configuration file
+nnoremap <leader>confe :e $MYVIMRC<CR>
+" Reload vims configuration file
+nnoremap <leader>confr :source $MYVIMRC<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto-Paste toggle
@@ -361,6 +367,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Convenience wrapper to open the buffer list
 nnoremap gb :ls<CR>:b<Space>
+
+" Workaround for bd killing vim if nerdtree is open
+nnoremap <Leader>d :bp<cr>:bd #<cr>
 
 " quicker save
 noremap <Leader>s :update<CR>

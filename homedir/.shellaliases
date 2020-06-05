@@ -112,7 +112,7 @@ alias gpoh='git push origin HEAD'
 
 # Shorthand alias for my default AG & RG search commands
 alias Agd='ag -A 5 -B 5 --hidden --ignore "*.xcbuild" --ignore "*.d"'
-alias agd='ag -A 20 -B 20 --hidden --ignore "*.xcbuild" --ignore "*.d"'
+alias agd='ag -A 20 -B 20 --hidden --ignore ".git/*" --ignore "*.xcbuild" --ignore "*.d"'
 Alias agvd='ag -A 20 -B 20 --ignore *.xcbuild'
 # ripgrep alias TODO
 
@@ -135,7 +135,7 @@ alias selectedxcodebuild='SELECTEDXCODEBUILD=`xcode-select -p`; $SELECTEDXCODEBU
 alias xcd='xcode-debug'
 
 # open xcode project file
-alias xcode="find . -regex '.*\.xcodeproj$' -not -path "*Carthage*" -not -path "*Pods*" -maxdepth 4"
+alias xcode="find . -regex '.*\.xcodeproj$' -not -path '*Carthage*' -not -path '*Pods*' -maxdepth 4 | xargs -I {} open {} ;"
 
 # zipfolder
 alias zipfolder='tar -zcvf '
@@ -184,3 +184,13 @@ alias bgr='~/.dotfiles/bat-extras/src/batgrep.sh'
 
 # EXA defaults
 alias exd='exa -l --group-directories-first --all --color always'
+
+# vim
+alias v='vim'
+
+# copy last command into system paste buffer
+alias ylast='fc -ln -1 | pbcopy '
+
+# ytdl
+#
+alias ytdl='youtube-dl $(pbpaste)'
