@@ -365,14 +365,14 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Convenience wrapper to open the buffer list
-nnoremap gb :ls<CR>:b<Space>
-
 " Workaround for bd killing vim if nerdtree is open
 nnoremap <Leader>d :bp<cr>:bd #<cr>
 
 " quicker save
 noremap <Leader>s :update<CR>
+
+" Convenience wrapper to open the buffer list
+nnoremap gb :ls<CR>:b<Space>
 
 " Make square brackets cycle to next and previous buffers
 
