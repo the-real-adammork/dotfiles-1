@@ -10,6 +10,8 @@ call togglebg#map("<F5>")
 " Always use light
 set background=light
 
+let $PAGER=''
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -80,8 +82,8 @@ Plugin 'posva/vim-vue'
 " Copy of the Official Apple Swift VIM Plugin
 Plugin 'bumaociyuan/vim-swift'
 " Ale, async language linting and syntax checking
-"Plugin 'w0rp/ale'
-Plugin 'file:///Users/adammork/.dotfiles/ale'
+Plugin 'dense-analysis/ale'
+"Plugin 'file:///Users/adammork/.dotfiles/ale'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -158,7 +160,13 @@ set isk+=_,$,@,%,# " none of these should be word dividers, so make them not be
 set nosol " leave my cursor where it was
 set pastetoggle=<F10>
 imap kj <Esc> " make shift enter exit insert mode to normal mode, should make exiting faster because VIM isnt waiting for a key combination tied to <esc>
+set shell=/usr/local/bin/zsh
 
+
+" Edit vimr configuration file
+nnoremap <leader>confe :e $MYVIMRC<CR>
+" Reload vims configuration file
+nnoremap <leader>confr :source $MYVIMRC<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto-Paste toggle
@@ -357,11 +365,14 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Convenience wrapper to open the buffer list
-nnoremap gb :ls<CR>:b<Space>
+" Workaround for bd killing vim if nerdtree is open
+nnoremap <Leader>d :bp<cr>:bd #<cr>
 
 " quicker save
 noremap <Leader>s :update<CR>
+
+" Convenience wrapper to open the buffer list
+nnoremap gb :ls<CR>:b<Space>
 
 " Make square brackets cycle to next and previous buffers
 
@@ -496,8 +507,14 @@ let g:ale_sign_warning = '--'
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {}
 let g:ale_fixers.swift = []
+let g:ale_fixers.javascript = ['eslint']
 let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
 let g:ale_javascript_prettier_options = '--use-tabs'
+
+" Do not lint or fix minified files.
+let g:ale_pattern_options = {
+\ '\.envrc': {'ale_linters': ['sh'], 'ale_fixers': []},
+\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Git Gutter

@@ -5,6 +5,8 @@
 ._*
 id_rsa
 node_modules
+homedir/.tmux/resurrect/last
+homedir/.gitconfig
 homedir/.vim/backup/*
 !homedir/.vim/backup/.gitignore
 homedir/.vim/temp/*
@@ -18,3 +20,7 @@ homedir/.tmux/plugins/*
 .git_template/hooks/post-commit
 
 tmux_scripts/rcp_average.csv
+homedir/.tmux/resurrect/*.txt
+homedir/.tmux/
+
+tmux.*\.log

@@ -1,4 +1,0 @@
-pane	dotfiles	1	:zsh	1	:*	1	:/Users/adam/.dotfiles	0	zsh	:
-pane	dotfiles	1	:zsh	1	:*	2	:/Users/adam/.dotfiles	1	zsh	:
-window	dotfiles	1	1	:*	3ef6,238x73,0,0{119x73,0,0,0,118x73,120,0,1}
-state	dotfiles	

@@ -2,3 +2,23 @@
 
 Figure out the `next` browser, stuff, saving `guix` binary, but will need to spend time on the complete solution
 
+- Splitup install script into different sections ? 
+- Integrate new changes from up-stream ?
+- Breakup install into semantic chunks 
+
+Go Piece by Piece .. dont just install everything .. do full audit and get this thing working legit and at a minimum splitup into stuff that can be run more than once and stuff that should be run one. Also this is essentially the intermediate step to doing a proper legit dots thing where I use some infrastructure, I think for now I need to do heavy trimming, then live in tha and then migrate to something proper and long-te
+
+alacritty
+shell scripts
+shell fn
+homedir etc..
+color config
+
+VIM 
+TMUX
+brew
+cask ?
+macOS
+xVim
+fonts ?
+
