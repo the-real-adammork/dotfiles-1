@@ -87,9 +87,6 @@ Plugin 'dense-analysis/ale'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 "
 
 " Specify a directory for plugins
@@ -103,12 +100,17 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'ryanolsonx/vim-lsp-swift'
 Plug 'dyng/ctrlsf.vim'
 
+Plug 'elixir-editors/vim-elixir'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', {
     \ 'do': 'npm install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 call plug#end()
+
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+filetype plugin on
 
 if executable('sourcekit-lsp')
     au User lsp_setup call lsp#register_server({
@@ -461,6 +463,13 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 map ,nf :NERDTreeFind<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDCommenter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'elixir': { 'left': '#','right': '' } }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
