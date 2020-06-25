@@ -608,7 +608,7 @@ inoremap \st <Esc>:CtrlSFToggle<CR>
 
 let g:ctrlsf_ackprg = '/usr/local/bin/rg'
 let g:ctrlsf_extra_backend_args = {
-    \ 'rg': '--hidden'
+    \ 'rg': '--hidden -g "!.git"'
     \ }
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '50%'
