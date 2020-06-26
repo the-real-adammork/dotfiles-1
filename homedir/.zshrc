@@ -46,7 +46,7 @@ export CASE_SENSITIVE="true"
 DISABLE_UPDATE_PROMPT=true
 
 # disable colors in ls
-# export DISABLE_LS_COLORS="false"
+export DISABLE_LS_COLORS="true"
 
 # disable autosetting terminal title.
 export DISABLE_AUTO_TITLE="true"
