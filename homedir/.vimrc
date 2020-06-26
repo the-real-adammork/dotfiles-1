@@ -99,6 +99,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'ryanolsonx/vim-lsp-swift'
 Plug 'dyng/ctrlsf.vim'
+Plug 'pechorin/any-jump.vim'
 
 Plug 'elixir-editors/vim-elixir'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

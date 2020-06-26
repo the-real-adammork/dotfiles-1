@@ -193,4 +193,4 @@ alias ylast='fc -ln -1 | pbcopy '
 
 # ytdl
 #
-alias ytdl='youtube-dl $(pbpaste)'
+alias ytdl='youtube-dl -o "%(id)s.%(ext)s" "$(pbpaste)"'
