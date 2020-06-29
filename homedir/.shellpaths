@@ -67,3 +67,6 @@ export PATH="$PATH:$(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-m
 
 # Git home
 export GITHOME=$(git rev-parse --show-toplevel)
+
+# Add easyoptions
+export PATH="$PATH:$HOME/.dotfiles/lib_sh/easyoptions"
