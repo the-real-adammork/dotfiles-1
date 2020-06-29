@@ -114,13 +114,13 @@ convertVideoToGif() {
     ffmpeg -y -i "$1" -filter_complex "[0:v] fps=12,scale=if(gte(iw\,ih)\,min(540\,iw)\,-2):if(lt(iw\,ih)\,min(540\,ih)\,-2),split [a][b];[a] palettegen [p];[b][p] paletteuse" -r $FPS -f gif "$2_mini.gif"
   fi
   if [[ ($WIDTH -gt 540 || $HEIGHT -gt 540) ]]; then
-    ffmpeg -y -i "$1" -filter_complex "[0:v] fps=12,scale=if(gte(iw\,ih)\,min(720\,iw)\,-2):if(lt(iw\,ih)\,min(720\,ih)\,-2),split [a][b];[a] palettegen [p];[b][p] paletteuse" -r $FPS -f gif "$2_mini.gif"
+    ffmpeg -y -i "$1" -filter_complex "[0:v] fps=12,scale=if(gte(iw\,ih)\,min(720\,iw)\,-2):if(lt(iw\,ih)\,min(720\,ih)\,-2),split [a][b];[a] palettegen [p];[b][p] paletteuse" -r $FPS -f gif "$2_small.gif"
   fi
   if [[ ($WIDTH -gt 720 || $HEIGHT -gt 720) ]]; then
-    ffmpeg -y -i "$1" -filter_complex "[0:v] fps=12,scale=if(gte(iw\,ih)\,min(1024\,iw)\,-2):if(lt(iw\,ih)\,min(1024\,ih)\,-2),split [a][b];[a] palettegen [p];[b][p] paletteuse" -r $FPS -f gif "$2_mini.gif"
+    ffmpeg -y -i "$1" -filter_complex "[0:v] fps=12,scale=if(gte(iw\,ih)\,min(1024\,iw)\,-2):if(lt(iw\,ih)\,min(1024\,ih)\,-2),split [a][b];[a] palettegen [p];[b][p] paletteuse" -r $FPS -f gif "$2_medium.gif"
   fi
   if [[ ($WIDTH -gt 1024 || $HEIGHT -gt 1024) ]]; then
-    ffmpeg -y -i "$1" -filter_complex "[0:v] fps=12,scale=if(gte(iw\,ih)\,min(1280\,iw)\,-2):if(lt(iw\,ih)\,min(1280\,ih)\,-2),split [a][b];[a] palettegen [p];[b][p] paletteuse" -r $FPS -f gif "$2_mini.gif"
+    ffmpeg -y -i "$1" -filter_complex "[0:v] fps=12,scale=if(gte(iw\,ih)\,min(1280\,iw)\,-2):if(lt(iw\,ih)\,min(1280\,ih)\,-2),split [a][b];[a] palettegen [p];[b][p] paletteuse" -r $FPS -f gif "$2_large.gif"
   fi
 
   # Tried to deterministically generate with dimensions based on size*duration*fps
@@ -136,7 +136,7 @@ if [ $MODE = "process" ]; then
   printf "\n\n File is valid, continuing... \n\n"
 
   # define parameters
-  SIZE=24
+  SIZE=9
   BASENAME=$(basename "$INPUT" ".mov")
   BASENAME=$(basename "$BASENAME" ".MOV")
   BASENAME=$(basename "$BASENAME" ".mp4")
