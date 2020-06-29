@@ -99,6 +99,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'ryanolsonx/vim-lsp-swift'
 Plug 'dyng/ctrlsf.vim'
+Plug 'pechorin/any-jump.vim'
 
 Plug 'elixir-editors/vim-elixir'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -463,6 +464,11 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 map ,nf :NERDTreeFind<CR>
+
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDCommenter

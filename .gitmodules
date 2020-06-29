@@ -61,3 +61,6 @@
 [submodule "zsh-syntax-highlighting"]
 	path = zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "lib_sh/easyoptions"]
+	path = lib_sh/easyoptions
+	url = git@github.com:renatosilva/easyoptions.git
