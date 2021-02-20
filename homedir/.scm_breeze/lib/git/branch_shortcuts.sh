@@ -25,7 +25,7 @@ function _scmb_git_branch_shortcuts {
 
   # Use ruby to inject numbers into git branch output
   ruby -e "$( cat <<EOF
-    output = %x($_git_cmd branch --sort=-committerdate --color=always $(token_quote "$@") | head -n30)
+    output = %x($_git_cmd branch --sort=-committerdate --color=always $(token_quote "$@") | head -n$git_branch_head_number)
     line_count = output.lines.to_a.size
     output.lines.each_with_index do |line, i|
       spaces = (line_count > 9 && i < 9 ? "  " : " ")

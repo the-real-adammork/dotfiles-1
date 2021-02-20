@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+
+###########################
+# Install dependencies with user-friendly output
+###########################
+
+# include library helpers for colorized echo and require_brew, etc
+
+REPO_ROOT_DIR="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT_DIR" || exit
+
+function require_brew() {
+    running "brew $1 $2"
+    brew list $1 > /dev/null 2>&1 | true
+    if [[ ${PIPESTATUS[0]} != 0 ]]; then
+        action "brew install $1 $2"
+        brew install $1 $2
+        if [[ $? != 0 ]]; then
+            error "failed to install $1! aborting..."
+            # exit -1
+        fi
+    fi
+    ok
+}
+
+function require_gem() {
+    running "gem $1"
+    if [[ $(gem list --local | grep $1 | head -1 | cut -d' ' -f1) != $1 ]];
+        then
+            action "gem install $1"
+            gem install $1
+    fi
+    ok
+}
+
+###
+# some colorized echo helpers
+###
+
+# Colors
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;01m"
+COL_GREEN=$ESC_SEQ"32;01m"
+COL_YELLOW=$ESC_SEQ"33;01m"
+COL_BLUE=$ESC_SEQ"34;01m"
+COL_MAGENTA=$ESC_SEQ"35;01m"
+COL_CYAN=$ESC_SEQ"36;01m"
+
+function ok() {
+    echo -e "$COL_GREEN[ok]$COL_RESET "$1
+}
+
+function bot() {
+    echo -e "\n$COL_GREEN\[._.]/$COL_RESET - "$1
+}
+
+function running() {
+    echo -en "$COL_YELLOW ⇒ $COL_RESET"$1": "
+}
+
+function action() {
+    echo -e "\n$COL_YELLOW[action]:$COL_RESET\n ⇒ $1..."
+}
+
+function warn() {
+    echo -e "$COL_YELLOW[warning]$COL_RESET "$1
+}
+
+function error() {
+    echo -e "$COL_RED[error]$COL_RESET "$1
+}
+
+bot "Hi! I'm going to install tooling ..."
+
+action "Checking for [[:space:]] in Xcode filename"
+STR="$(xcode-select -p)"
+SUB=' '
+if [[ "$STR" == *"$SUB"* ]]; then
+    error "Xcode cannot have a space in its filename, rename your Xcode and try again."
+    exit 2
+fi
+ok "Xcode filename is valid"
+
+action "Checking for Xcode Command Line Tools"
+xcode-select -p 1>/dev/null
+if [[ $? != 0 ]]; then
+  error "Xcode Command Line Tools are not installed. Install with:"
+  echo -e "\n\nxcode-select --install\n\n"
+  exit 2
+fi
+ok "Xcode Command Line Tools Installed :)"
+
+running "checking homebrew install"
+brew_bin="$(which brew)" 2>&1 > /dev/null
+if [[ $? != 0 ]]; then
+  action "installing homebrew"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  if [[ $? != 0 ]]; then
+    error "unable to install homebrew, script $0 abort!"
+    exit 2
+  fi
+else
+  ok
+  # Make sure we’re using the latest Homebrew
+  running "updating homebrew"
+  brew update
+  ok
+fi
+ok
+
+require_brew gawk
+
+action "Checking for node & npm"
+if ! [ -x "$(command -v npm)" ]; then
+  require_brew node
+  if ! [ -x "$(command -v npm)" ]; then
+    error "Tried to install node/npm with brew but failed, or it isnt accessible in your path. Please install node/npm, and then re-run initialize. Goto NPMs website for a pre-compiled installer - https://www.npmjs.com/get-npm"
+    exit 2
+  else
+    npm install -g browser-sync
+  fi
+else
+  ok "node & npm installed !"
+  action "install browser-sync"
+  npm install -g browser-sync
+  ok "browser sync installed"
+fi
+
+require_brew fswatch
+require_brew coreutils
+require_brew yq
+
+ok "Success, your machine is now intialized"

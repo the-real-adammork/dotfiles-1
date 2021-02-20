@@ -7,6 +7,7 @@
 #echo "Logging to $logfile"
 #exec 3>&2 2>$logfile
 #setopt XTRACE
+
 # change
 
 # Path to your oh-my-zsh configuration.
@@ -55,6 +56,7 @@ export DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #
 
+export ZSH_DISABLE_COMPFIX="true"
 
 plugins=(z colorize compleat dirpersist autojump gulp history cp zsh-autosuggestions history-substring-search  zsh-syntax-highlighting)
 
@@ -225,12 +227,6 @@ export BAT_CONFIG_PATH="/Users/adam/.dotfiles/homedir"
 #
 #
 
-# Performance Logging
-#unsetopt XTRAC#E
-#exec 2>&3 3>&-
-#zprof
-#
-
 # dir env, move later
 eval "$(direnv hook zsh)"
 
@@ -244,3 +240,8 @@ export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 source /usr/local/opt/chnode/share/chnode/chnode.sh
+
+# Performance Logging
+#unsetopt XTRAC#E
+#exec 2>&3 3>&-
+#zprof

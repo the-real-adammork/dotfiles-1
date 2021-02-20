@@ -1,0 +1,58 @@
+#!/bin/bash
+
+usage()
+{
+    echo "usage: update-github-pages [-h]"
+    echo "Copmpiles documentation with jazzy (documentation-core) in the current branch..."
+    echo "... and updates \"gh=-pages\" branch with the output."
+    echo "... this repo must be configured to build 'Github Pages' from the 'gh-pages' branch"
+    echo -e "  -h    help"
+}
+
+##### Main
+
+BRANCH=$(git describe --all)
+
+# Check for valid options, show help/usage.
+while [ "$1" != "" ]; do
+    case $1 in
+        -h | --help )           usage
+                                exit
+                                ;;
+        * )                     usage
+                                exit 1
+    esac
+    shift
+done
+
+REPO_ROOT_DIR="$(git rev-parse --show-toplevel)"
+cd $REPO_ROOT_DIR
+
+printf "\n\n Updating Documentation \n"
+printf "\n ** only works if your machine is setup to build & compile documentation ** \n"
+printf "\n ** See Advanced Topics - https://pages.github.pie.apple.com/Fargo-Tools/documentation-core/setup.html for installation instructions ** \n\n\n\n"
+
+printf "\nCreating new branch for compiling docs\n"
+
+BRANCH_COPY_NAME="$BRANCH-CopyForUpdatingDocs"
+git checkout -b $BRANCH_COPY_NAME
+
+git fetch --all --tags
+jazzy -c --config .jazzy.yaml --no-skip-full-compile
+
+# .gitmodules file can cause issues for the Github Pages, lets remove.
+rm .gitmodules
+git add .gitmodules
+
+# Copy all of the "docs" into the root directory... This is where Github needs them to be
+# TODO - switch to using sym-link with index.html.
+cp -R docs/* ./
+git add .
+git add .jazzy.yaml
+git commit -m 'updating docs in gh-pages (from script)'
+git push origin $BRANCH_COPY_NAME:gh-pages -f
+
+# Delete docs copy branch
+git stash
+git checkout $BRANCH
+git branch -D $BRANCH_COPY_NAME

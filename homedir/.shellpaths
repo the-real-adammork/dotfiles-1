@@ -70,3 +70,18 @@ export GITHOME=$(git rev-parse --show-toplevel)
 
 # Add easyoptions
 export PATH="$PATH:$HOME/.dotfiles/lib_sh/easyoptions"
+
+# Add jazzy
+#export PATH="/Users/adammork/Projects/jazzy/bin:$PATH"
+
+# Add jazzy fork
+export PATH="/usr/local/bin/jazzy:$PATH"
+
+# Add jazzy fork
+export PATH="$HOME/Projects/workspace-cma/documentation-core/bin:$PATH"
+
+# Default macOS path, useful for testing
+export DEFAULT_PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+
+ #Use local jazzy
+#export PATH="/Users/adammork/Projects/jazzy/bin:$PATH"

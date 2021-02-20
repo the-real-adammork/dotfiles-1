@@ -158,10 +158,10 @@ alias gccur='git rev-parse --verify HEAD'
 alias gbcur='git rev-parse --abbrev-ref HEAD'
 
 # get current commit hash
-alias gccury='git rev-parse --verify HEAD | pbcopy'
+alias gccury="git rev-parse --verify HEAD | tr -d '\n' | pbcopy"
 
 # get current git branch
-alias gbcury='git rev-parse --abbrev-ref HEAD | pbcopy'
+alias gbcury="git rev-parse --abbrev-ref HEAD | tr -d '\n' | pbcopy"
 
 #git fetch origin shorthand
 alias gfo='git fetch origin'
@@ -187,3 +187,7 @@ alias ylast='fc -ln -1 | pbcopy '
 # ytdl
 #
 alias ytdl='youtube-dl -o "%(id)s.%(ext)s" "$(pbpaste)"'
+
+# First workspace file
+#
+alias firstworkspace='find . -regex ".*\.xcodeproj$" -not -path "*Carthage*" -not -path "*Pods*" -maxdepth 4 | xargs -I {} echo "{}/project.xcworkspace" | head -n1'

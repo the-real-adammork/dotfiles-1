@@ -32,3 +32,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+#export PATH="$(brew --prefix ruby)/bin":$PATH
+#export PATH="$(gem env gemdir)/bin":$PATH

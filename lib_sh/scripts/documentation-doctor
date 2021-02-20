@@ -1,0 +1,106 @@
+#!/bin/bash
+
+###
+# some colorized echo helpers
+###
+
+# Colors
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;01m"
+COL_GREEN=$ESC_SEQ"32;01m"
+COL_YELLOW=$ESC_SEQ"33;01m"
+COL_BLUE=$ESC_SEQ"34;01m"
+COL_MAGENTA=$ESC_SEQ"35;01m"
+COL_CYAN=$ESC_SEQ"36;01m"
+
+function ok() {
+    echo -e "$COL_GREEN[ok]$COL_RESET "$1
+}
+
+function bot() {
+    echo -e "\n$COL_GREEN\[._.]/$COL_RESET - "$1
+}
+
+function running() {
+    echo -en "$COL_YELLOW ⇒ $COL_RESET"$1": "
+}
+
+function action() {
+    echo -e "\n$COL_YELLOW[action]:$COL_RESET\n ⇒ $1..."
+}
+
+function warn() {
+    echo -e "$COL_YELLOW[warning]$COL_RESET "$1
+}
+
+function error() {
+    echo -e "$COL_RED[error]$COL_RESET "$1
+}
+
+action "Checking user shell"
+USER_SHELL="$(echo $SHELL | sed 's:.*/::g')"
+ok "User shell is $USER_SHELL"
+
+PROFILE_LOCATION="~/.zprofile"
+if [ "$USER_SHELL" = "zsh" ]; then
+  PROFILE_LOCATION="~/.zprofile"
+elif [ "$USER_SHELL" = "bash" ]; then
+  PROFILE_LOCATION="~/.bash_profile"
+elif [ "$USER_SHELL" = "sh" ]; then
+  PROFILE_LOCATION="~/.profile"
+else
+  PROFILE_LOCATION="<Unknown user shell>"
+fi
+
+
+JAZZY_PATH="$(which jazzy)"
+JAZZY_EXPECTED_PATH="/usr/local/bin/jazzy"
+JAZZY_VERSION_NUMBER_GRANULARITY="$(jazzy -v | sed 's/jazzy version: //g' | sed 's/[0-9]//g' | tr -d '\n')"
+GEM_LIST_HAS_FORK="$(gem list jazzy | grep -e '[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*' | wc -l | tr -d '[:blank:]')"
+
+action "checking that our jazzy fork is installed"
+if [ "$JAZZY_PATH" = "$JAZZY_EXPECTED_PATH" ]; then
+    ok
+elif [ "$JAZZY_VERSION_NUMBER_GRANULARITY" = "..." ]; then
+    ok
+elif [ "$GEM_LIST_HAS_FORK" = "1" ]; then
+    error "Fargo-Tools' \`jazzy\` fork is installed but another version of Jazzy is also installed with a higher version and ruby will choose that by default instead. You can list all the versions with \`$ gem list jazzy\`. Fargo-Tools\' \`jazzy\` fork has a 4-part version number. Install all versions with a higher version number using a command like this: \`$ gem uninstall jazzy --version 0.13.7\` and so on for each higher version."
+elif test -f "$JAZZY_EXPECTED_PATH"; then
+    error "Fargo-Tools' \`jazzy\` fork is installed but its not being resolved correctly in your \$PATH. \n\nAdd these 2 lines to the end of your $PROFILE_LOCATION. \n\n\`\`\`\n# Add jazzy fork\nexport PATH=\"/usr/local/bin/jazzy:\$PATH\"\n\`\`\`\n\n\n"
+else
+    error "Fargo-Tools' \`jazzy\` fork not installed, or its not in your \$PATH. Visit: https://pages.github.pie.apple.com/Fargo-Tools/documentation-core/Getting%20Started.html"
+fi
+
+action "checking \`browser-sync\` installation..."
+if ! [ -x "$(command -v browser-sync)" ]; then
+  warn "browser-sync not installed. Install to speed up your workflow with: \n\n$ npm install -g browser-sync\n\n OR visit https://pages.github.pie.apple.com/Fargo-Tools/documentation-core/Getting%20Started.html and follow instructions to install these dependencies with the included \`initialize\` script.\n\n\n"
+else
+  ok
+fi
+
+action "checking \`fswatch\` installation..."
+if ! [ -x "$(command -v fswatch)" ]; then
+  warn "fswatch not installed. (needed for -watch). Install with: \n\n$ brew install fswatch\n\n OR visit https://pages.github.pie.apple.com/Fargo-Tools/documentation-core/Getting%20Started.html and follow instructions to install these dependencies with the included \`initialize\` script.\n\n\n"
+else
+  ok
+fi
+
+trap "echo exiting..." INT
+
+action "Checking for dependencies that we use in the 'documentation-helper' script".
+
+
+if ! [ -x "$(command -v browser-sync)" ]; then
+  error "\nbrowser-sync not installed (needed for -watch). Install to speed up your workflow with: \n\n$ npm install -g browser-sync\n\n "
+fi
+
+if ! [ -x "$(command -v fswatch)" ]; then
+  error "\nfswatch not installed (needed for -watch). Install with: \n\n$ brew install fswatch\n\n"
+fi
+
+if ! [ -x "$(command -v yq)" ]; then
+  error "\nyq not installed (needed for -watch). Install with: \n\n$ brew install yq\n\n"
+fi
+
+ok

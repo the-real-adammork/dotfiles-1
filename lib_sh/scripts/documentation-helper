@@ -1,0 +1,185 @@
+#!/bin/bash
+
+# Check for script dependencies
+
+DEPENDENCIES_MET=1
+if ! [ -x "$(command -v jazzy)" ]; then
+  echo -e "\njazzy not installed (needed for -build), install with: \n\n$ gem install jazzy\n\n"
+  exit
+fi
+
+if ! [ -x "$(command -v browser-sync)" ]; then
+  echo -e "\nbrowser-sync not installed. Install to speed up your workflow with: \n\n$ npm install -g browser-sync\n\n "
+fi
+
+if ! [ -x "$(command -v fswatch)" ]; then
+  echo -e "\nfswatch not installed. (needed for -watch). Install with: \n\n$ brew install fswatch\n\n"
+fi
+
+if ! [ -x "$(command -v yq)" ]; then
+  echo -e "\nyq not installed. (needed for -watch). Install with: \n\n$ brew install yq\n\n"
+fi
+
+usage()
+{
+    echo "usage: cma-documentation [-m mode] | [-h]"
+    echo -e "  -m    modes are 'compile', 'build', 'startwebserver', 'run', and 'watch'. \n"
+    echo -e "\t'build' generates documentation with jazzy using previously saved output from 'compile or an empty data structure if none exists.',"
+    echo -e "\t'build_and_open' generates documentation with jazzy using output from 'compile' and opens a new tab in Safari,"
+    echo -e "\t'run' performs a 'compile' then a 'build' and then starts a webserver (if you have hot-reload) if not opens a new Safari tab."
+    echo -e "\t'watch' uses fswatch to re-run startwebserver when anything changes in files meaningful for documentation. \n"
+    echo -e "\t'compile_then_watch' compiles the project completely then uses fswatch to re-run startwebserver when anything changes in files meaningful for documentation. \n"
+    echo -e "  -h    help"
+}
+
+##### Main
+
+# Check for valid number of aguments
+if [ $# -le 0 ]; then
+  echo "Your command contains no arguments"
+  usage
+  exit
+fi
+
+# Check for valid options
+# parse params
+while [[ "$#" > 0 ]]; do case $1 in
+  -m|--mode) MODE="$2"; shift;shift;;
+  -a|--advanced) ADVANCED="YES";shift;;
+  *) usage "Unknown parameter passed: $1"; shift; shift;;
+esac; done
+
+# verify params
+if [ -z "$MODE" ]; then usage "Mode not set"; fi;
+
+REPO_ROOT_DIR="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT_DIR" || exit
+
+echo "Documentation Core"
+
+startwebserver()
+{
+  if ! [ -x "$(command -v browser-sync)" ]; then
+    echo -e "\n browser-sync not installed. Opening in Safari, refresh manaually to see changes. Install browser-sync with: \n\n$ npm install -g browser-sync\n\n"
+    open docs/index.html
+  else
+    echo "Killing existing browser-sync process"
+    cd "$REPO_ROOT_DIR" || exit
+
+	  ps aux | grep browser-sync | grep node | awk '{print $2}' | xargs -L 1 -I {} kill {} ;
+
+    echo "Starting browser-sync hot reload server"
+    cd docs || exit
+    browser-sync start -s -f . --no-notify --host "$(ipconfig getifaddr en0)" --port 9000 &
+
+    cd ..
+  fi
+}
+
+watch() {
+	echo "Watching ..."
+  cd "$REPO_ROOT_DIR" || exit
+
+	if ! [ -x "$(command -v fswatch)" ]; then
+  	echo 'Error: fswatch is not installed. install from brew with `brew install fswatch`' >&2
+  	exit 1
+	fi
+
+  DOCS_DIR=$(yq r .jazzy.yaml documentation_directory)
+  if [[ ! -z "$DOCS_DIR" ]]; then
+    echo "Watching documentation directory $DOCS_DIR"
+  else
+    DOCS_DIR="documentation/*" echo "**WARNING ** config value documentation_directory not set in .jazzy.yaml. defaulting to documentation/*"
+  fi
+
+  WATCH_DIRECTORY=$(cd $DOCS_DIR ; pwd)
+
+  # Watch for changes to documentation and re-build
+  fswatch -o ./ --exclude='.*' \
+    --include='.jazzy.yaml' \
+    --exclude="xcworkspace" \
+    --include="$WATCH_DIRECTORY/*" \
+    | xargs -n1 -I% /bin/bash -c "$(path4script) -m build" &
+
+  # Watch for changes to Swift files & recompile single-files
+  fswatch ./ --event Updated --event Created --exclude='.*' \
+    --exclude="docs/*" \
+	  --include="**/*.swift$" \
+    | xargs -I% jazzy -c --config .jazzy.yaml --skip-full-compile --sourcekitten-recompile-files '%'
+}
+
+# get path to the currently running script
+path4script() {
+	prg=$0
+	if [ ! -e "$prg" ]; then
+  	case $prg in
+    	(*/*) exit 1;;
+    	(*) prg=$(command -v -- "$prg") || exit;;
+  	esac
+	fi
+	dir=$(
+  	cd -P -- "$(dirname -- "$prg")" && pwd -P
+	) || exit
+	prg=$dir/$(basename -- "$prg") || exit
+
+	printf '%s\n' "$prg"
+}
+
+if [ "$MODE" = "compile" ]; then
+  jazzy -c --config .jazzy.yaml --no-skip-full-compile
+elif  [ "$MODE" = "build" ]; then
+  jazzy -c --config .jazzy.yaml --skip-full-compile
+elif  [ "$MODE" = "build_and_open" ]; then
+  jazzy -c --config .jazzy.yaml --skip-full-compile
+  open docs/index.html
+elif  [ "$MODE" = "startwebserver" ]; then
+  if ! [ -x "$(command -v browser-sync)" ]; then
+    echo -e "\nbrowser-sync not installed and is required for 'startwebserver'. Install with: \n\n$ npm install -g browser-sync\n\n "
+    exit
+  fi
+
+  startwebserver
+  echo -e "\n\nbrowser-sync server running \n\n"
+elif  [ "$MODE" = "run" ]; then
+  jazzy -c --config .jazzy.yaml --skip-full-compile
+  startwebserver
+elif  [ "$MODE" = "watch" ]  || [ "$MODE" = "compile_then_watch" ]; then
+
+  if ! [ -x "$(command -v browser-sync)" ]; then
+    echo -e "\nbrowser-sync not installed. Your workflow can be improved if you install with: \n\n$ npm install -g browser-sync\n\n "
+  fi
+
+  if ! [ -x "$(command -v fswatch)" ]; then
+    echo -e "\nfswatch not installed. (needed for -watch). Install with: \n\n$ brew install fswatch\n\n"
+    exit
+  fi
+
+  if ! [ -x "$(command -v yq)" ]; then
+    echo -e "\nyq not installed. (needed for -watch). Install with: \n\n$ brew install yq\n\n"
+    exit
+  fi
+
+
+  if [ "$MODE" = "watch" ]; then
+    jazzy -c --config .jazzy.yaml --skip-full-compile
+  else
+    # compile_then_watch
+    jazzy -c --config .jazzy.yaml --no-skip-full-compile
+  fi
+  startwebserver
+	watch
+elif  [ "$MODE" = "update" ]; then
+  echo "Updating ..."
+  SCRIPT_DIR=$(echo "$0" | sed -r "s/(.+)\/.+/\1/")
+  cd "$SCRIPT_DIR" || exit
+  REPO_ROOT_DIR="$(git rev-parse --show-toplevel)"
+  cd "$REPO_ROOT_DIR" || exit
+  git fetch origin main && git checkout main && git reset --hard FETCH_HEAD
+  echo "Updating and re-installing the Fargo-Tools jazzy fork"
+  bin/install.sh
+  echo "documentation-helper -m update is DONE"
+else
+  usage
+fi
+
+trap "echo exiting..." INT

@@ -94,6 +94,7 @@ call vundle#end()            " required
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+Plug 'unblevable/quick-scope'
 Plug 'junegunn/fzf'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -104,9 +105,9 @@ Plug 'pechorin/any-jump.vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', {
-    \ 'do': 'npm install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
+"Plug 'prettier/vim-prettier', {
+    "\ 'do': 'npm install',
+    "\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 call plug#end()
 
 filetype plugin indent on    " required
@@ -165,6 +166,8 @@ set pastetoggle=<F10>
 imap kj <Esc> " make shift enter exit insert mode to normal mode, should make exiting faster because VIM isnt waiting for a key combination tied to <esc>
 set shell=/usr/local/bin/zsh
 
+" no-op u key in visual mode, its more annoying than its worth
+vmap u <Nop>
 
 " Edit vimr configuration file
 nnoremap <leader>confe :e $MYVIMRC<CR>
@@ -204,15 +207,25 @@ autocmd InsertLeave * set nocul
 " Files/Backups/Sessions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autoread
-set nobackup
-set nowb
-set noswapfile
-set directory=~/.vim/temp " directory for temp files
+"set nobackup
+"set nowb
+"set noswapfile
+set backupdir=~/.vimbackups//
+set directory=~/.vimswaps//
+au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
+"set directory=~/.vim/temp " directory for temp files
 set makeef=error.err " When using make, where should it dump the file
 set sessionoptions+=globals " What should be saved during sessions being saved
 set sessionoptions+=localoptions " What should be saved during sessions being saved
 set sessionoptions+=resize " What should be saved during sessions being saved
 set sessionoptions+=winpos " What should be saved during sessions being saved
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM-autosave
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:autosave_extensions = '.backup'  " -  extension used for saving modified files
+let g:autosave_backup     = '~/.vimbackups' " -  directory where to save backup files
+let g:autosave_timer      = 60*1000  " -  number of milliseconds to trigger (by default every 5 minutes)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim UI
@@ -531,6 +544,13 @@ let g:ale_pattern_options = {
 \ '\.envrc': {'ale_linters': ['sh'], 'ale_fixers': []},
 \}
 
+nmap ]a :ALENext -wrap -error <CR>
+nmap [a :ALEPrevious -wrap -error <CR>
+nmap ]aw :ALENextWrap<CR>
+nmap [aw :ALEPreviousWrap<CR>
+nmap ]A :ALELast<CR>
+nmap [A :ALEFirst<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Git Gutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -646,7 +666,8 @@ let g:lightline = {
 "Prettier"
 "
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
+let g:prettier#quickfix_enabled = 0
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
 
 nnoremap { gT
 nnoremap } gt
