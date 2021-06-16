@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+j""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Must Have
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme solarized
@@ -84,6 +84,8 @@ Plugin 'bumaociyuan/vim-swift'
 " Ale, async language linting and syntax checking
 Plugin 'dense-analysis/ale'
 "Plugin 'file:///Users/adammork/.dotfiles/ale'
+"
+Plugin 'tpope/vim-unimpaired'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -93,13 +95,16 @@ call vundle#end()            " required
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-
+Plug 'kkoomen/gfi.vim'
 Plug 'junegunn/fzf'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'ryanolsonx/vim-lsp-swift'
 Plug 'dyng/ctrlsf.vim'
 Plug 'pechorin/any-jump.vim'
+
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'ryanolsonx/vim-lsp-swift'
 
 Plug 'elixir-editors/vim-elixir'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -165,12 +170,24 @@ set pastetoggle=<F10>
 imap kj <Esc> " make shift enter exit insert mode to normal mode, should make exiting faster because VIM isnt waiting for a key combination tied to <esc>
 set shell=/usr/local/bin/zsh
 
+" Save file on double esc
+map <Esc><Esc> :w<CR>
 
 " Edit vimr configuration file
 nnoremap <leader>confe :e $MYVIMRC<CR>
 " Reload vims configuration file
 nnoremap <leader>confr :source $MYVIMRC<CR>
 
+" Search commands automatically center viewport
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" Search for text selected in visual mode
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto-Paste toggle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -373,7 +390,7 @@ nnoremap <Leader>d :bp<cr>:bd #<cr>
 
 " quicker save
 noremap <Leader>s :update<CR>
-
+noremap <ESC><ESC> :update<CR>
 " Convenience wrapper to open the buffer list
 nnoremap gb :ls<CR>:b<Space>
 
@@ -384,15 +401,17 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-map <up> <ESC>:bp<RETURN> " left arrow (normal mode) switches buffers
-map <down> <ESC>:bn<RETURN> " right arrow (normal mode) switches buffers
 let NERDTreeQuitOnOpen = 0
+let NERDTreeNaturalSort = 1
 " map <right> <ESC>:Tlist<RETURN> " show taglist
 " map <left> <ESC>:NERDTreeToggle<RETURN>  " moves left fa split
 " map <F2> <ESC>ggVG:call SuperRetab()<left>
 " map <F12> ggVGg? " apply rot13 for people snooping over shoulder, good fun
 
 map <Leader>exp yyp!!sh<CR><Esc>
+
+" List all lowercase marks
+nnoremap <silent> ,m :marks abcdefghijklmnopqrstuvwxyz<CR>:normal! `
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful abbrevs
@@ -426,6 +445,7 @@ nnoremap <C-b> <C-b>3<C-e> "  Make overlap 3 extra on control-b
 " Yank text to the macOS clipboard
 noremap <leader>y "*y
 noremap <leader>yy "*Y
+noremap yy "*y
 
 " Preserve indentation while pasting text from the macOS clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
@@ -522,9 +542,10 @@ let g:ale_sign_warning = '--'
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {}
 let g:ale_fixers.swift = []
-let g:ale_fixers.javascript = ['eslint']
-let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
-let g:ale_javascript_prettier_options = '--use-tabs'
+
+"let g:ale_fixers.javascript = ['eslint']
+"let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
+"let g:ale_javascript_prettier_options = '--use-tabs'
 
 " Do not lint or fix minified files.
 let g:ale_pattern_options = {
@@ -604,8 +625,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " Leader + o  opens a default FZFConfiguration.
 nnoremap <silent> <expr> <Leader>o (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZFDefault\<cr>"
 nnoremap <silent> <expr> <Leader>oa (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZFAllDefault\<cr>"
-command! -nargs=*  FZFDefault :call fzf#run({'source': 'rg --hidden -l ""', 'sink': 'e'})
-command! -nargs=*  FZFAllDefault :call fzf#run({'source': 'rg --hidden -l ""', 'sink': 'e'})
+command! -nargs=*  FZFDefault :call fzf#run({'source': 'rg --hidden -l --ignore-file "/Users/adam/.vimfzfignore" ""', 'sink': 'e'}) command! -nargs=*  FZFAllDefault :call fzf#run({'source': 'rg --hidden -l ""', 'sink': 'e'})
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CtrlSF
@@ -623,10 +643,15 @@ inoremap \st <Esc>:CtrlSFToggle<CR>
 
 let g:ctrlsf_ackprg = '/usr/local/bin/rg'
 let g:ctrlsf_extra_backend_args = {
-    \ 'rg': '--hidden'
+    \ 'rg': '--hidden -g "!.git/*"',
     \ }
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '50%'
+
+let g:ctrlsf_auto_focus = {
+    \ "at": "done",
+    \ "duration_less_than": 500
+    \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Instant Markdown
@@ -646,7 +671,7 @@ let g:lightline = {
 "Prettier"
 "
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
 
 nnoremap { gT
 nnoremap } gt
