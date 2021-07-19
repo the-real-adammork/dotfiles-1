@@ -136,7 +136,7 @@ if [ $MODE = "process" ]; then
   printf "\n\n File is valid, continuing... \n\n"
 
   # define parameters
-  SIZE=9
+  SIZE="8.5"
   BASENAME=$(basename "$INPUT" ".mov")
   BASENAME=$(basename "$BASENAME" ".MOV")
   BASENAME=$(basename "$BASENAME" ".mp4")

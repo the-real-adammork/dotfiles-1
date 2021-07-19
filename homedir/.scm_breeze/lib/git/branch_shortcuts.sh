@@ -13,6 +13,7 @@
 
 defaultbranch="4.18"
 
+BRANCH_DISPLAY_NUMBER=${GB_BRANCHES:-30}
 unalias $git_branch_alias > /dev/null 2>&1; unset -f $git_branch_alias > /dev/null 2>&1
 function _scmb_git_branch_shortcuts {
   fail_if_not_git_repo || return 1
@@ -25,7 +26,7 @@ function _scmb_git_branch_shortcuts {
 
   # Use ruby to inject numbers into git branch output
   ruby -e "$( cat <<EOF
-    output = %x($_git_cmd branch --sort=-committerdate --color=always $(token_quote "$@") | head -n30)
+    output = %x($_git_cmd branch --sort=-committerdate --color=always $(token_quote "$@") | head -n$BRANCH_DISPLAY_NUMBER)
     line_count = output.lines.to_a.size
     output.lines.each_with_index do |line, i|
       spaces = (line_count > 9 && i < 9 ? "  " : " ")

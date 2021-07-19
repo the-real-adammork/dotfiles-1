@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+for tz in Europe/Moscow Europe/Berlin US/Eastern US/Central US/Pacific; do
+  echo -e "$tz:\t$(TZ=$tz date -R)"
+done

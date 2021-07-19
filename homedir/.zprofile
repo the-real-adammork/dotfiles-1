@@ -22,7 +22,6 @@ function precmd () {
   z --add "$(pwd -P)"
 }
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 ##
 # Your previous /Users/adammork/.zprofile file was backed up as /Users/adammork/.zprofile.macports-saved_2020-03-03_at_11:51:31

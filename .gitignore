@@ -20,6 +20,9 @@ homedir/.tmux/plugins/*
 .git_template/hooks/post-commit
 
 tmux_scripts/rcp_average.csv
+tmux_scripts/user_exports.sh
+tmux_scripts/president_trump_job_approval-6179.csv
+
 homedir/.tmux/resurrect/*.txt
 homedir/.tmux/
 

@@ -2,8 +2,10 @@
 # https://jonas.github.io/tig/doc/tigrc.5.html
 
 # Copy commit hash to system clipboard
+bind generic 7 !@sh -c "echo -n %(tag) | sed 's/\-n //g' | tr -d '\\n' | pbcopy"
 bind generic 9 !@sh -c "echo -n %(commit) | sed 's/\-n //g' | tr -d '\\n' | pbcopy"
 bind generic 8 !@sh -c "echo -n %(file) | sed 's/\-n //g' | tr -d '\\n' | pbcopy"
+bind refs T ?git checkout %(tag)
 
 # Apply the current stash
 bind stash A !?git stash apply %(stash)

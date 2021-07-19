@@ -244,3 +244,7 @@ export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 source /usr/local/opt/chnode/share/chnode/chnode.sh
+
+#if [ -f "$HOME/.mc_env.sh" ]; then
+    #source "$HOME/.mc_env.sh"
+#fi

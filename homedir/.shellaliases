@@ -62,7 +62,7 @@ alias network.internalip="ifconfig en0 | egrep -o '([0-9]+\.[0-9]+\.[0-9]+\.[0-9
 # -h Short size suffixes (B, K, M, G, P)
 # -p Postpend slash to folders
 #alias ls='ls -G -h -p '
-alias ls='exa -l --group-directories-first --all --color always'
+alias ls='exa -l -s=modified --group-directories-first --all --color always'
 alias ll='ls -l -G -h -p '
 
 # Print each PATH entry on a separate line
@@ -111,8 +111,8 @@ alias gpoh='git push origin HEAD'
 #gcfr = git checkout, git fetch, git reset -- see functions file
 
 # Shorthand alias for my default AG & RG search commands
-alias Agd='ag -A 5 -B 5 --hidden --ignore ".git/*" --ignore "*.xcbuild" --ignore "*.d"'
-alias agd='ag -A 20 -B 20 --hidden --ignore ".git/*" --ignore "*.xcbuild" --ignore "*.d"'
+alias Agd='ag -A 5 -B 5 --hidden --ignore ".git/*" --ignore "*.xcbuild" --ignore "*.d" --ignore "*node_modules*"'
+alias agd='ag -A 20 -B 20 --hidden --ignore ".git/*" --ignore "*.xcbuild" --ignore "*.d" --ignore "*yarn.lock*" --ignore "*package-lock.json*" -l "yarn"'
 alias agvd='ag -A 20 -B 20 --ignore *.xcbuild'
 # ripgrep alias TODO
 
@@ -144,7 +144,6 @@ alias zipfolder='tar -zcvf '
 alias untar='tar -xvf'
 
 # python alias ?
-alias python='python2'
 
 # cd to git root directory
 alias cdgr='cd $(git rev-parse --show-toplevel)'
@@ -194,3 +193,12 @@ alias ylast='fc -ln -1 | pbcopy '
 # ytdl
 #
 alias ytdl='youtube-dl -o "%(id)s.%(ext)s" "$(pbpaste)"'
+
+# psql
+#
+# psql
+alias pg-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+
+# vtop
+alias vtop='vtop --theme monokai'
